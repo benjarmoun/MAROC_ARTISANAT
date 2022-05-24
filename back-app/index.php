@@ -4,10 +4,10 @@ require_once './autoload.php';
 require_once './controllers/HomeController.php';
 $home = new HomeController();
 $res = new ProductsController();
-$user = new userController();
+$user = new CategoryController();
 
 
-$pages = ['addProduct','getproducts','updateProduct','deleteProduct','getProductByCategory','getSingleReservation','updateReservation','auth','addUser','deleteUser','getSingleUser','getUsers','updateUser'];
+$pages = ['addProduct','getproducts','updateProduct','deleteProduct','getProductByCategory','getCategories','addCategory','deleteCategory','auth','addUser','deleteUser','getSingleUser','getUsers','updateUser'];
 // $parts = explode('/',$_GET['page']);
 // print_r($parts) ;
 // if(isset($_SESSION['log']) && $_SESSION['log'] === true){

@@ -32,7 +32,7 @@ class CategoryController{
                     extract($row);
     
                     $cat_item = array(
-                    'id' => $id,
+                    'id' => $category_id,
                     'name' => $name,
                     );
     
@@ -92,7 +92,7 @@ class CategoryController{
             // Get raw posted data
             $data = json_decode(file_get_contents("php://input"));
     
-            $category->id = $data->id;
+            $category->category_id = $data->category_id;
     
             // Delete category
             if($category->delete()) {

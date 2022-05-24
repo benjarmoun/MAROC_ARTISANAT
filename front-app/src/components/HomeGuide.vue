@@ -8,12 +8,8 @@
 
 
 <template>
-<!-- <div>
-    <img class="z-1 sticky" src="src\assets\gerab.jpg" alt="">
-    <h1 class="z-2"> test Test</h1>
-</div>
-<p>khvkbkblnlnlbjgcv,blcgvhbjn</p> -->
 
+    <WelcomeItem/>
     <HomeCompo1>
         <template #title >
             HANDCRAFTED WITH LOVE    
