@@ -118,7 +118,7 @@ class Products
         }
 
         // Print error if something goes wrong
-        printf("Error: $s.\n", $stmt->error);
+        printf("Error: ", $stmt->error);
         
         return false;
     }
@@ -166,7 +166,7 @@ class Products
         }
 
         // Print error if something goes wrong
-        printf("Error: $s.\n", $stmt->error);
+        printf("Error: ", $stmt->error);
         
         return false;
     }
@@ -195,7 +195,7 @@ class Products
         }
 
         // Print error if something goes wrong
-        printf("Error: $s.\n", $stmt->error);
+        printf("Error: ", $stmt->error);
         
         return false;
     }

@@ -7,64 +7,9 @@
 
 
 
-  class UserController
-  {
-      public function auth()
-      {
-          // Instantiate DB & connect
-          $database = new Database();
-          $db = $database->connect();
-
-          // Instantiate  user object
-          $user = new User($db);
-
-          // Get posted data
-          $data = json_decode(file_get_contents("php://input"), true);
-        //   die(var_dump($data));
-          $user = new User($db);
-          $result = $user->login($data);
-            // print_r($result);
-          // $result = User::login($data);
-          if ($result->ref === $data['ref'] && $result->nom === $data['nom']) {
-              echo json_encode($result);
-          } else {
-              echo json_encode(
-                  array('message' => 'Login Failed')
-              );
-          }
-      }
-
-      public function addUser()
-      {
-          // Instantiate DB & connect
-          $database = new Database();
-          $db = $database->connect();
-
-          // Instantiate  user object
-          $user = new User($db);
-
-          // Get posted data
-          $data = json_decode(file_get_contents("php://input"));
-
-          $user->ref = $data->ref;
-          $user->nom = $data->nom;
-          $user->prenom = $data->prenom;
-          $user->date_naissance = $data->date_naissance;
-
-          // Create user
-          if ($user->create()) {
-              echo json_encode(
-                  array('message' => 'user Created')
-              );
-          } else {
-              echo json_encode(
-                  array('message' => 'user Not Created')
-              );
-          }
-      }
-    
-      public function deleteUser()
-      {
+  class UserController{
+      //get all users
+      public function getUsers(){
           // Instantiate DB & connect
           $database = new Database();
           $db = $database->connect();
@@ -72,89 +17,38 @@
           // Instantiate user object
           $user = new User($db);
 
-          // Get raw posted data
-          $data = json_decode(file_get_contents("php://input"));
-
-          // Set ref to update
-          $user->ref = $data->ref;
-
-          // Delete user
-          if ($user->delete()) {
-              echo json_encode(
-                  array('message' => 'User Deleted')
-              );
-          } else {
-              echo json_encode(
-                  array('message' => 'User Not Deleted')
-              );
-          }
-      }
-    
-      public function getSingleUser()
-      {
-          $data = json_decode(file_get_contents("php://input"));
-          // Instantiate DB & connect
-          $database = new Database();
-          $db = $database->connect();
-
-          // Instantiate  user object
-          $user = new User($db);
-
-          // Get ID
-          //   $user->ref = isset($_GET['ref']) ? $_GET['ref'] : die();
-
-          // Get user
-          $user_arr = $user->read_single($data->ref);
-
-          // Create array
-          //   $user_arr = array(
-          //     'ref' => $user->ref,
-          //     'nom' => $user->nom,
-          //     'prenom' => $user->prenom,
-          //     'date_naissance' => $user->date_naissance
-          //   );
-
-          // Make JSON
-          print_r(json_encode($user_arr));
-      }
-
-      public function getUsers()
-      {
-          // Instantiate DB & connect
-          $database = new Database();
-          $db = $database->connect();
-
-          // Instantiate user object
-          $user = new User($db);
-
-          // Blog user query
+          // Get users
           $result = $user->read();
+
           // Get row count
           $num = $result->rowCount();
 
           // Check if any users
           if ($num > 0) {
-              // user array
-              $users_arr = array();
-              // $users_arr['data'] = array();
+              // Cat array
+              $user_arr = array();
+              $user_arr['data'] = array();
 
+              // Loop through results
               while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                  // Extract row
                   extract($row);
 
                   $user_item = array(
-              'ref' => $ref,
-              'nom' => $nom,
-              'prenom' => $prenom,
-              'date_naissance' => $date_naissance
-            );
+                      'user_id' => $user_id,
+                      'fname' => $fname,
+                      'lname' => $lname,
+                      'email' => $email,
+                      'password' => $password,
+                      'seller' => $seller
+                  );
 
                   // Push to "data"
-                  array_push($users_arr, $user_item);
-                  // array_push($users_arr['data'], $user_item);
+                  array_push($user_arr['data'], $user_item);
               }
 
               // Turn to JSON & output
-              echo json_encode($users_arr);
+              echo json_encode($user_arr);
           } else {
               // No users
               echo json_encode(
@@ -163,34 +57,172 @@
           }
       }
 
-      public function updateUser()
-      {
+      //register user
+      public function registerUser(){
           // Instantiate DB & connect
           $database = new Database();
           $db = $database->connect();
 
-          // Instantiate  user object
+          // Instantiate user object
           $user = new User($db);
 
-          // Get raw posted data
-          $data = json_decode(file_get_contents("php://input"));
+          // Get data
+          $data = json_decode(file_get_contents('php://input'));
 
-          // Set ref to update
-          $user->ref = $data->ref;
+          // Set data
+          if($data)
+          {
+            $user->fname = $data->fname;
+            $user->lname = $data->lname;
+            $user->email = $data->email;
+            $user->password = password_hash($data->password, PASSWORD_DEFAULT);
+            $user->seller = $data->seller;
+          }
+          // echo $data;
 
-          $user->nom = $data->nom;
-          $user->prenom = $data->prenom;
-          $user->date_naissance = $data->date_naissance;
-
-          // Update user
-          if ($user->update()) {
+          // Create user
+          if ($user->create()) {
+              // User created
               echo json_encode(
-                  array('message' => 'User Updated')
+                  array('message' => 'User Created')
               );
           } else {
+              // User not created
               echo json_encode(
-                  array('message' => 'User Not Updated')
+                  array('message' => 'User Not Created')
               );
           }
       }
+
+      //delete user by user_id
+      public function deleteUser(){
+          // Instantiate DB & connect
+          $database = new Database();
+          $db = $database->connect();
+
+          // Instantiate user object
+          $user = new User($db);
+
+          // Get data
+          $data = json_decode(file_get_contents('php://input'));
+
+          // Set data
+          if($data)
+          {
+            $user->user_id = $data->user_id;
+          }
+          // echo $data;
+
+          // Delete user
+          if ($user->remove()) {
+              // User deleted
+              echo json_encode(
+                  array('message' => 'User Deleted')
+              );
+          } else {
+              // User not deleted
+              echo json_encode(
+                  array('message' => 'User Not Deleted')
+              );
+          }
+      }
+
+      //get single user by user_id
+      public function getSingleUser(){
+          // Get data
+          $data = json_decode(file_get_contents('php://input'));
+          
+          // Instantiate DB & connect
+          $database = new Database();
+          $db = $database->connect();
+
+          // Instantiate user object
+          $user = new User($db);
+          
+          // Set data
+          if ($data) {
+              $user->user_id = $data->user_id;
+          }
+          // echo $data;
+          
+          // Get user
+          $result = $user->read_single($user->user_id);
+
+          // Get row count
+          $num = $result->rowCount();
+
+          // Check if any users
+
+          if ($num > 0) {
+              // Cat array
+              $user_arr = array();
+              $user_arr['data'] = array();
+
+              // Loop through results
+              while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                  // Extract row
+                  extract($row);
+
+                  $user_item = array(
+                    'user_id' => $user_id,
+                    'fname' => $fname,
+                    'lname' => $lname,
+                    'email' => $email,
+                    'password' => $password,
+                    'seller' => $seller
+                  );
+
+                  // Push to "data"
+                  array_push($user_arr['data'], $user_item);
+              }
+
+              // Turn to JSON & output
+              echo json_encode($user_arr);
+          } else {
+              // No users
+              echo json_encode(
+                  array('message' => 'No users Found')
+              );
+          }
+      }
+
+      //login user
+      public function login(){
+          // Instantiate DB & connect
+          $database = new Database();
+          $db = $database->connect();
+
+          // Instantiate user object
+          $user = new User($db);
+
+          // Get data
+          $data = json_decode(file_get_contents('php://input'));
+
+          // Set data
+          if ($data) {
+              $user->email = $data->email;
+              $user->password = $data->password;
+          }
+          // echo $data;
+
+          // Login user
+          if ($user->loginUser()) {
+              // User logged in
+              echo json_encode(
+                  array('message' => 'User Logged In')
+              );
+          } else {
+              // User not logged in
+              echo json_encode(
+                  array('message' => 'User Not Logged In')
+              );
+          }
+      }
+      
+
+
+
+      
+    
   }
+  

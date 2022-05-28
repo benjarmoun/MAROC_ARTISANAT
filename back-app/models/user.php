@@ -6,10 +6,12 @@
       private $table = 'user';
 
       // user Properties
-      public $ref;
-      public $nom;
-      public $prenom;
-      public $date_naissance;
+      public $user_id;
+      public $fname;
+      public $lname;
+      public $password;
+      public $email;
+      public $seller;
 
       // Constructor with DB
       public function __construct($db)
@@ -17,197 +19,144 @@
           $this->conn = $db;
       }
 
-      // Get users
-      public function read()
-      {
-          // Create query
-          $query = 'SELECT ref, nom, prenom, date_naissance
-                                FROM ' . $this->table .'';
+        // Get users
+        public function read()
+        {
+            // Create query
+            $query = 'SELECT user_id, fname, lname, password, email, seller
+                                 FROM ' . $this->table . '';
+
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+
+            // Execute query
+            $stmt->execute();
+
+            return $stmt;
+        }
+
+        // Get user by user_id
+        public function read_single($user_id)
+        {
+            // Create query
+            $query = 'SELECT user_id, fname, lname, password, email, seller
+                                 FROM ' . $this->table . ' WHERE user_id = :user_id';
+
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+
+            // Bind ID
+            $stmt->bindParam(':user_id', $user_id);
+
+            // Execute query
+            $stmt->execute();
+
+            return $stmt;
+        }
+
+
+        
+        //remove user
+        public function remove()
+        {
+            // Create query
+            $query = 'DELETE FROM ' . $this->table . ' WHERE user_id = :user_id';
+
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+
+            // Clean data
+            $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+
+            // Bind data
+            $stmt->bindParam(':user_id', $this->user_id);
+
+            // Execute query
+            if ($stmt->execute()) {
+                return true;
+            }
+
+            // Print error if something goes wrong
+            printf("Error: %s.\n", $stmt->error);
+
+            return false;
+        }
+
+        // create user
+        public function create()
+        {
+            // Create query
+            $query = 'INSERT INTO ' . $this->table . ' SET fname = :fname, lname = :lname, password = :password, email = :email, seller = :seller';
+
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+
+            // Clean data
+            $this->fname = htmlspecialchars(strip_tags($this->fname));
+            $this->lname = htmlspecialchars(strip_tags($this->lname));
+            $this->password = htmlspecialchars(strip_tags($this->password));
+            $this->email = htmlspecialchars(strip_tags($this->email));
+            $this->seller = htmlspecialchars(strip_tags($this->seller));
+
+            // Bind data
+            $stmt->bindParam(':fname', $this->fname);
+            $stmt->bindParam(':lname', $this->lname);
+            $stmt->bindParam(':password', $this->password);
+            $stmt->bindParam(':email', $this->email);
+            $stmt->bindParam(':seller', $this->seller);
+
+            // Execute query
+            if ($stmt->execute()) {
+                return true;
+            }
+
+            // Print error if something goes wrong
+            printf("Error: %s.\n", $stmt->error);
+
+            return false;
+        }
+
+        //login user
+        public function loginUser()
+        {
+            // Create query
+            $query = 'SELECT * FROM ' . $this->table . ' WHERE email = :email';
+
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+
+            // Clean data
+            $this->email = htmlspecialchars(strip_tags($this->email));
+
+            // Bind data
+            $stmt->bindParam(':email', $this->email);
+
+            // Execute query
+            $stmt->execute();
+            
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // set properties
+            $this->user_id = $row['user_id'];
+            $this->fname = $row['fname'];
+            $this->lname = $row['lname'];
+            // $this->password = $row['password'];
+            $this->email = $row['email'];
+            $this->seller = $row['seller'];
+
+            // echo $this->password;
+
+            if(password_verify($this->password, $row['password'])){
+
+                return true;
+            }
+            else{
+                return false;
+            }
+            
+            
+            // return user
+            // return $stmt;
+        }
       
-          // Prepare statement
-          $stmt = $this->conn->prepare($query);
-
-          // Execute query
-          $stmt->execute();
-
-          return $stmt;
-      }
-
-      // write a function to do login
-      // public function login() {
-      //   // Create query
-      //   $query = 'SELECT * FROM ' . $this->table . ' WHERE ref = :ref';
-      
-      //   // Prepare statement
-      //   $stmt = $this->conn->prepare($query);
-      //   $stmt->bindParam(':ref', $this->ref);
-
-      //   // Execute query
-      //   $stmt->execute();
-
-      //   return $stmt;
-      // }
-
-
-    //   public function login($data)
-    //   {
-    //       $ref = $data['ref'];
-    //       // die();
-    //       // die(print_r($data));
-      
-    //       $query = 'SELECT * FROM user WHERE ref = :ref';
-
-    //       $DB = new Database ;
-    //       $stmt = $DB->connect()->prepare($query);
-    //       $stmt->execute(array(":ref" => $ref));
-    //       $user = $stmt->fetch(PDO::FETCH_OBJ);
-    //       return $user;
-    //       if ($stmt->execute()) {
-    //           return 'OK';
-    //       }
-    //   }
-
-       //create a function to do login with ref and nom
-         public function login($data)
-         {
-              $ref = $data['ref'];
-              $nom = $data['nom'];
-              // die();
-              // die(print_r($data));
-              
-              $query = 'SELECT * FROM user WHERE ref = :ref AND nom = :nom';
-    
-              $DB = new Database ;
-              $stmt = $DB->connect()->prepare($query);
-              $stmt->execute(array(":ref" => $ref, ":nom" => $nom));
-              $user = $stmt->fetch(PDO::FETCH_OBJ);
-            //   die(print_r($user));
-              return $user;
-
-              if ($stmt->execute()) {
-                return 'OK';
-              }
-         }
-         
-
-    
-
-      // Get Single user
-      public function read_single($ref)
-      {
-          // Create query
-          $query = 'SELECT ref, nom, prenom, date_naissance
-                                  FROM ' . $this->table .'
-                                    WHERE
-                                      ref = ?';
-
-          // Prepare statement
-          $stmt = $this->conn->prepare($query);
-
-          // Bind ref
-          $stmt->bindParam(1, $ref);
-
-          // Execute query
-          $stmt->execute();
-
-          return $stmt->fetch(PDO::FETCH_ASSOC);
-
-          // Set properties
-          // $this->nom = $row['nom'];
-          // $this->prenom = $row['prenom'];
-          // $this->date_naissance = $row['date_naissance'];
-      }
-
-
-      // Create Post
-      public function create()
-      {
-          // Create query
-          $query = 'INSERT INTO ' . $this->table . ' SET ref = :ref, nom = :nom, prenom = :prenom, date_naissance = :date_naissance';
-
-          // Prepare statement
-          $stmt = $this->conn->prepare($query);
-
-          // Clean data
-          $this->ref = htmlspecialchars(strip_tags($this->ref));
-          $this->nom = htmlspecialchars(strip_tags($this->nom));
-          $this->prenom = htmlspecialchars(strip_tags($this->prenom));
-          $this->date_naissance = htmlspecialchars(strip_tags($this->date_naissance));
-
-          // Bind data
-          $stmt->bindParam(':ref', $this->ref);
-          $stmt->bindParam(':nom', $this->nom);
-          $stmt->bindParam(':prenom', $this->prenom);
-          $stmt->bindParam(':date_naissance', $this->date_naissance);
-
-          // Execute query
-          if ($stmt->execute()) {
-              return true;
-          }
-
-          // Print error if something goes wrong
-          printf("Error: %s.\n", $stmt->error);
-
-          return false;
-      }
-
-      // Update Post
-      public function update()
-      {
-          // Create query
-          $query = 'UPDATE ' . $this->table . '
-                                SET nom = :nom, prenom = :prenom, date_naissance = :date_naissance
-                                WHERE ref = :ref';
-
-          // Prepare statement
-          $stmt = $this->conn->prepare($query);
-
-          // Clean data
-          $this->nom = htmlspecialchars(strip_tags($this->nom));
-          $this->prenom = htmlspecialchars(strip_tags($this->prenom));
-          $this->date_naissance = htmlspecialchars(strip_tags($this->date_naissance));
-          $this->ref = htmlspecialchars(strip_tags($this->ref));
-
-          // Bind data
-          $stmt->bindParam(':nom', $this->nom);
-          $stmt->bindParam(':prenom', $this->prenom);
-          $stmt->bindParam(':date_naissance', $this->date_naissance);
-          $stmt->bindParam(':ref', $this->ref);
-
-          // Execute query
-          if ($stmt->execute()) {
-              return true;
-          }
-
-          // Print error if something goes wrong
-          printf("Error: %s.\n", $stmt->error);
-
-          return false;
-      }
-
-      // Delete Post
-      public function delete()
-      {
-          // Create query
-          $query = 'DELETE FROM ' . $this->table . ' WHERE ref = :ref';
-
-          // Prepare statement
-          $stmt = $this->conn->prepare($query);
-
-          // Clean data
-          $this->ref = htmlspecialchars(strip_tags($this->ref));
-
-          // Bind data
-          $stmt->bindParam(':ref', $this->ref);
-
-          // Execute query
-          if ($stmt->execute()) {
-              return true;
-          }
-
-          // Print error if something goes wrong
-          printf("Error: %s.\n", $stmt->error);
-
-          return false;
-      }
-  }
+}

@@ -41,7 +41,7 @@
 								<label class="block mb-2 text-sm font-bold text-gray-700" for="email">
 									Email
 								</label>
-								<input
+								<input v-model="email"
 									class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
 									id="email"
 									type="email"
@@ -53,32 +53,13 @@
                                 <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
                                     Password
                                 </label>
-                                <input
-                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="password"
-                                    type="password"
-                                    placeholder="******************"
-                                />
+                                <input v-model="password" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********" />
                                 <p class="text-xs italic text-red-500">Please choose a password.</p>
 								
-								<!-- <div class="md:ml-2">
-									<label class="block mb-2 text-sm font-bold text-gray-700" for="c_password">
-										Confirm Password
-									</label>
-									<input
-										class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-										id="c_password"
-										type="password"
-										placeholder="******************"
-									/>
-								</div> -->
 							</div>
 							<div class="mb-6 text-center">
-								<button
-									class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-									type="button"
-								>
-									Register Account
+								<button class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="button" @click="login">
+									LOG IN
 								</button>
 							</div>
 							<hr class="mb-6 border-t" />
@@ -100,6 +81,50 @@
 
 <script>
     export default {
-        name: 'RegisterForm',
+        name: 'login-form',
+		data() {
+			return {
+				email: '',
+				password: '',
+			};
+		},
+		methods: {
+			login() {
+
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Cookie", "PHPSESSID=3g9jd4qq8p2vu4lanl28ben59s");
+
+				var raw = JSON.stringify({
+				"email": this.email,
+				"password": this.password
+				});
+
+				var requestOptions = {
+				method: 'POST',
+				headers: myHeaders,
+				body: raw,
+				redirect: 'follow'
+				};
+
+				fetch("http://localhost/MAROC_ARTISANAT/back-app/login", requestOptions)
+				.then(response => response.text())
+				.then(result => {
+					result=JSON.parse(result);
+					console.log(result);
+					if(result.message == "User Logged In"){
+						localStorage.setItem("token", result.message);
+						this.$router.push({ name: 'home' });
+					}
+				})
+				
+					
+				.catch(error => console.log('error', error));
+
+
+			},
+		},
+		
     };
+
 </script>
