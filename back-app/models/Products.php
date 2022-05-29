@@ -44,8 +44,9 @@ class Products
 
         // Execute query
         $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $stmt;
+        return $result?$result:false;
     }
 
     // Get products of one seller

@@ -20,37 +20,45 @@ class ProductsController{
         $result = $product->read();
 
         // Get row count
-        $num = $result->rowCount();
+        // $num = $result->rowCount();
 
         // Check if any categorys
-        if($num > 0) {
+        /* if($num > 0) {
             // Cat array
             $prod_arr = array();
             $prod_arr['data'] = array();
 
-            while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                extract($row);
+            // while($row = $result->fetch(PDO::FETCH_DEFAULT)) {
+            //     extract($row);
 
-                $prod_item = array(
-                'id' => $id,
-                'seller_id' => $seller_id,
-                'category_id' => $category_id,
-                'name' => $name,
-                'price' => $price,
-                'description' => $description,
-                'picture' => $picture,
-                );
+            //     $prod_item = array(
+            //     'id' => $id,
+            //     'seller_id' => $seller_id,
+            //     'category_id' => $category_id,
+            //     'name' => $name,
+            //     'price' => $price,
+            //     'description' => $description,
+            //     'picture' => $picture,
+            //     );
 
-                // Push to "data"
-                array_push($prod_arr['data'], $prod_item);
-            }
+            //     // Push to "data"
+            //     array_push($prod_arr['data'], $prod_item);
+            // }
             die(print_r($prod_arr));
-
+        
             // Turn to JSON & output
-            echo json_encode($prod_arr);
+            // echo json_encode($data);
 
         } else {
             // No products
+            echo json_encode(
+                array('message' => 'No products Found')
+            );
+        } */
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
             echo json_encode(
                 array('message' => 'No products Found')
             );

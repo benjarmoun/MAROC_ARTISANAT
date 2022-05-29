@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="max-w-2xl mx-auto bg-white p-16">
-            <form @submit.prevent="addProduct">
+            <form @submit="addProduct">
                 <div class="mb-6">
                     <label for="title"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
@@ -33,6 +33,12 @@
                         <option value="1">Category 1</option>
                         <option value="2">Category 2</option>
                         <option value="3">Category 3</option>
+                        <option value="4">Category 4</option>
+                        <option value="5">Category 5</option>
+                        <option value="6">Category 6</option>
+                        <option value="7">Category 7</option>
+                        <option value="8">Category 8</option>
+
                     </select>
                 </div>
                 <div class="mb-6">
@@ -74,7 +80,6 @@ export default {
     },
     methods: {
 
-
         // async  addProduct() {
         //     var myHeaders = new Headers();
         //     myHeaders.append("Content-Type", "application/json");
@@ -106,7 +111,6 @@ export default {
             
         // },
 
-
         async addProduct(){
 
             let result = await axios.post(
@@ -121,8 +125,6 @@ export default {
                 }
             );
             console.log(result);
-
-
         },
 
         getpic(e) { 

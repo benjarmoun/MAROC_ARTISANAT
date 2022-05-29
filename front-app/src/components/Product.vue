@@ -1,7 +1,7 @@
 
 <template> 
     <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
-        <img :src= Pic class="object-cover w-full rounded-md h-72 xl:h-80" alt="T-Shirt">
+        <img :src='"src/assets/"+this.pic' class="object-cover w-full rounded-md h-72 xl:h-80" alt="T-Shirt">
         <h4 class="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">{{title}}</h4>
         <p class="text-blue-500">${{price}}</p>
 
@@ -17,7 +17,7 @@
 export default {
     name: 'Product',
     props: {
-        Pic: String,
+        pic: String,
         price:  Number,
         title: String,
     },
@@ -26,14 +26,11 @@ export default {
     },
     data() {
         return {
-           
+           picture: "gerab.jpg",
         }
     },
     mounted() {
-        
-        console.log(this.Pic)
-        console.log(this.t)
-        console.log(this.title)
+       
     },
 }
 </script>
