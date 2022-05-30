@@ -35,7 +35,6 @@ class Products
             picture
         FROM
             ' . $this->table . '
-            WHERE category_id = "2"
         ORDER BY
             price';
 
