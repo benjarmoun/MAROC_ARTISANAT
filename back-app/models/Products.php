@@ -28,13 +28,14 @@ class Products
         $query = 'SELECT
             id,
             seller_id,
-            category_id,
+            -- category_id,
             name,
             price,
             description,
             picture
         FROM
             ' . $this->table . '
+            WHERE category_id = "2"
         ORDER BY
             price';
 
@@ -167,7 +168,7 @@ class Products
         }
 
         // Print error if something goes wrong
-        printf("Error: ", $stmt->error);
+        printf("Error: %s", $stmt->error);
         
         return false;
     }

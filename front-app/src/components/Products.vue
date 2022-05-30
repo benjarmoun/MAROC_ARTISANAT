@@ -6,7 +6,7 @@
         <Product price="98.45" title="Lampe Plafonia en cuivre" Pic="src\assets\lamps\LANTERNE_1.jpg"/>
         <Product price="120.79" title="LANTERNE 6 FACES" Pic="src\assets\lamps\lanterne-6-faces-msdsa-.jpg"/>
         <Product price="98.45" title="Lampe Plafonia en cuivre" Pic="src\assets\lamps\LANTERNE_1.jpg"/> -->
-        <!-- <Product price="120.79" title="LANTERNE 6 FACES" pic="src\assets\lamps\lanterne-6-faces-msdsa-.jpg"/> -->
+        <!-- <Product price="120.79" title="LANTERNE 6 FACES" pic="carpet-vintage azilal.jpg"/> -->
         <product v-for="product in products" :price="product.price" :title="product.name" :pic="product.picture" />
 
     </div>
@@ -57,7 +57,7 @@ export default {
             );
             
             this.products = result.data;
-        console.log(result.data[0]);
+        console.log(result.data);
         },
     },
     mounted() {

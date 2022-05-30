@@ -12,7 +12,7 @@
       <div class="md:flex-1 px-4">
         <div x-data="{ image: 1 }" x-cloak>
           <!-- <div class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4"> -->
-            <img class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4" src="src\assets\lamps\lampe-marocaine-goutte-deau3-300x300.jpg" alt="">
+            <img class="h-64 md:h-80 rounded-lg bg-gray-100 m-auto" src="src\assets\lamps\lampe-marocaine-goutte-deau3-300x300.jpg" alt="">
             <!-- <div x-show="image === 1" class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center">
               <span class="text-5xl">1</span>
             </div> -->
