@@ -82,10 +82,10 @@ export default {
         details(id){
             this.$router.push({
                 name: 'ProductDetails',
-                props: {
-                    // id: this.product.id
-                    id: id
-                },
+                // props: {
+                //     // id: this.product.id
+                //     id: id
+                // },
                 params: {
                     id: id
                 }

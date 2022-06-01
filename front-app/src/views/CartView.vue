@@ -1,5 +1,4 @@
 <script setup>
-import AddProduct from "../components/AddProduct.vue";
 import cartcompo from "../components/CartCompo.vue";
 
 </script>
