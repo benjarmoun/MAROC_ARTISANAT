@@ -5,20 +5,20 @@
 
     <div class="py-6">
 
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6" v-for="dt in product" :key="dt.id">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6"  :key="product.id">
         <div class="flex flex-col md:flex-row -mx-4">
           <div class="md:flex-1 px-4">
-            <img :src='"src/assets/" + dt.picture' class="h-64 md:h-80 rounded-lg bg-gray-100 m-auto" alt="">
+            <img :src='"src/assets/" + product.picture' class="h-64 md:h-80 rounded-lg bg-gray-100 m-auto" alt="">
           </div>
           <div class="md:flex-1 px-4">
-            <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">{{ dt.name }}</h2>
+            <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">{{ product.name }}</h2>
             <p class="text-gray-500 text-sm">By <a href="#" class="text-indigo-600 hover:underline">STORE NAME</a></p>
 
             <div class="flex items-center space-x-4 my-4">
               <div>
                 <div class="rounded-lg bg-gray-100 flex py-2 px-3">
                   <span class="text-indigo-400 mr-1 mt-1">$</span>
-                  <span class="font-bold text-indigo-600 text-3xl">{{ dt.price }} </span>
+                  <span class="font-bold text-indigo-600 text-3xl">{{ product.price }} </span>
                 </div>
               </div>
               <div class="flex-1">
@@ -27,7 +27,7 @@
               </div>
             </div>
 
-            <p class="text-gray-500">{{ dt.description }} </p>
+            <p class="text-gray-500">{{ product.description }} </p>
             <img :src='"src/assets/" + this.pic' alt="">
             <div class="flex py-4 space-x-4">
               <div class="relative">
@@ -109,21 +109,17 @@ export default {
     //     console.log(error);
     //   });
 
-
-
-
-
     async getProductID() {
       var data = {
         // "id": this.$route.params.id
         "id": this.id
       };
       console.log(data.id);
-      let result = await axios.post(
-        'http://localhost/MAROC_ARTISANAT/back-app/getProductID', JSON.stringify(data)
+      let result = await axios.get(
+        'http://localhost/MAROC_ARTISANAT/back-app/getProductID/'+data.id
       );
-      this.product = result.data;
-      console.log(this.product[0]);
+      this.product = result.data[0];
+      console.log(this.product);
     },
   },
   mounted() {

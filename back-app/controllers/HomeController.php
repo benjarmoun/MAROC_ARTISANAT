@@ -18,8 +18,6 @@ class HomeController{
     // }
     
     public function index($page,$res){
-        // $res = new ReservationController();
-        // $res = new userController();
         $res->$page();
     }
 

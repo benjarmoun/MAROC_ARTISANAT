@@ -28,8 +28,37 @@ class ProductsController{
         }
     }
 
-    //get single product
-    public function getProductID(){
+    // //get single product
+    // public function getProductID(){
+
+    //     // Instantiate DB & connect
+    //     $database = new Database();
+    //     $db = $database->connect();
+
+    //     // Instantiate product object
+    //     $product = new Products($db);
+
+    //     // Get raw posted data
+    //     $data = json_decode(file_get_contents("php://input"));
+
+    //     if($data){
+    //         $product->id = $data->id;
+    //     }
+
+    //     // product read query
+    //     $result = $product->getProductByID();
+
+    //     if ($result) {
+    //         echo json_encode($result);
+    //     } else {
+    //         echo json_encode(
+    //             array('message' => 'No product Found')
+    //         );
+    //     }
+    // }
+
+    //get single product with params
+    public function getProductID($id){
 
         // Instantiate DB & connect
         $database = new Database();
@@ -39,11 +68,11 @@ class ProductsController{
         $product = new Products($db);
 
         // Get raw posted data
-        $data = json_decode(file_get_contents("php://input"));
+        // $data = json_decode(file_get_contents("php://input"));
 
-        if($data){
-            $product->id = $data->id;
-        }
+        // if($data){
+            $product->id = $id;
+        // }
 
         // product read query
         $result = $product->getProductByID();
@@ -56,6 +85,8 @@ class ProductsController{
             );
         }
     }
+
+
 
     // add product
     public function addProduct(){
