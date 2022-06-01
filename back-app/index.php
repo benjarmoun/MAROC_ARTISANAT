@@ -8,7 +8,7 @@ $user = new UserController();
 $cat = new CategoryController();
 
 
-$pages = ['addProduct','getproducts','updateProduct','deleteProduct','getProductByCategory','getCategories','addCategory','deleteCategory','auth','registerUser','deleteUser','getSingleUser','getUsers','login','updateUser'];
+$pages = ['addProduct','getproducts','updateProduct','deleteProduct','getProductByCategory','getCategories','addCategory','deleteCategory','auth','registerUser','deleteUser','getSingleUser','getUsers','login','updateUser','getProductID'];
 // $parts = explode('/',$_GET['page']);
 // print_r($parts) ;
 // if(isset($_SESSION['log']) && $_SESSION['log'] === true){

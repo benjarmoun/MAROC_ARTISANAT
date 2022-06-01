@@ -11,7 +11,7 @@
                     </div>
 					<!-- Col -->
 					<div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
-						<h3 class="pt-4 text-2xl text-center">Log I!</h3>
+						<h3 class="pt-4 text-2xl text-center">Log In!</h3>
 						<form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
 							<div class="mb-4 md:flex md:justify-between">
 								<!-- <div class="mb-4 md:mr-2 md:mb-0">
@@ -53,8 +53,12 @@
                                 <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
                                     Password
                                 </label>
-                                <input v-model="password" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********" />
-                                <p class="text-xs italic text-red-500">Please choose a password.</p>
+								
+                                <input v-model="password" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********"  />
+                                
+								<!-- /*input with error*/ -->
+								<!-- <input v-model="password" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********"  />
+                                <p class="text-xs italic text-red-500">Please choose a password.</p> -->
 								
 							</div>
 							<div class="mb-6 text-center">
@@ -111,10 +115,15 @@
 				.then(response => response.text())
 				.then(result => {
 					result=JSON.parse(result);
-					console.log(result);
-					if(result.message == "User Logged In"){
-						localStorage.setItem("token", result.message);
-						this.$router.push({ name: 'home' });
+					// console.log(result);
+					if(result.message == "User Not Logged In"){
+						console.log("error");
+					}else{
+						console.log(result);
+						//json encode result data
+						localStorage.setItem('user', JSON.stringify(result.data));
+						// localStorage.setItem("user", result.data);
+						// this.$router.push({ name: 'home' });
 					}
 				})
 				

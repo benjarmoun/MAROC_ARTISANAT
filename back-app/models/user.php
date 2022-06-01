@@ -117,46 +117,61 @@
         }
 
         //login user
-        public function loginUser()
+        // public function loginUser()
+        // {
+        //     // Create query
+        //     $query = 'SELECT * FROM ' . $this->table . ' WHERE email = :email';
+
+        //     // Prepare statement
+        //     $stmt = $this->conn->prepare($query);
+
+        //     // Clean data
+        //     $this->email = htmlspecialchars(strip_tags($this->email));
+
+        //     // Bind data
+        //     $stmt->bindParam(':email', $this->email);
+
+        //     // Execute query
+        //     $stmt->execute();
+            
+        //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //     // set properties
+        //     $this->user_id = $row['user_id'];
+        //     $this->fname = $row['fname'];
+        //     $this->lname = $row['lname'];
+        //     // $this->password = $row['password'];
+        //     $this->email = $row['email'];
+        //     $this->seller = $row['seller'];
+
+            
+        //     // echo $this->password;
+            
+        //     if(password_verify($this->password, $row['password'])){
+        //         // return user array
+        //         return $row;
+
+        //         // return true;
+        //     }
+        //     else{
+        //         return false;
+        //     }
+            
+            
+        //     // return user
+        //     // return $stmt;
+        // }
+
+        public function loginuser()
         {
-            // Create query
             $query = 'SELECT * FROM ' . $this->table . ' WHERE email = :email';
-
-            // Prepare statement
-            $stmt = $this->conn->prepare($query);
-
-            // Clean data
-            $this->email = htmlspecialchars(strip_tags($this->email));
-
-            // Bind data
-            $stmt->bindParam(':email', $this->email);
-
-            // Execute query
-            $stmt->execute();
-            
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            // set properties
-            $this->user_id = $row['user_id'];
-            $this->fname = $row['fname'];
-            $this->lname = $row['lname'];
-            // $this->password = $row['password'];
-            $this->email = $row['email'];
-            $this->seller = $row['seller'];
-
-            // echo $this->password;
-
-            if(password_verify($this->password, $row['password'])){
-
-                return true;
+            $stm=$this->conn->prepare($query);
+            $stm->bindParam(':email', $this->email);
+            if($stm->execute())
+            {
+                return $stm->fetch(PDO::FETCH_OBJ);
             }
-            else{
-                return false;
-            }
-            
-            
-            // return user
-            // return $stmt;
+            return false;
         }
       
 }

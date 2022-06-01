@@ -5,27 +5,29 @@ import Products from "./Products.vue"
 export default {
     name: 'Shop',
     components: {
-    Product,
-    Products,
-}
+        Product,
+        Products,
+    }
 }
 </script>
 
 <template>
-<!-- component -->
+    <!-- component -->
     <section class="bg-white dark:bg-gray-900">
         <div class="container px-6 py-8 mx-auto">
             <div class="lg:flex lg:-mx-2">
                 <div class="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Carpets</a>
-                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Ceramics & Pottery</a>
-                    <a href="#" class="block font-medium text-blue-600 dark:text-blue-500 hover:underline">Copperware</a>
+                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Ceramics &
+                        Pottery</a>
+                    <a href="#"
+                        class="block font-medium text-blue-600 dark:text-blue-500 hover:underline">Copperware</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Leather</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Basketry</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Lamps</a>
-                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Trousers</a>
+                    <!-- <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Trousers</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Shorts</a>
-                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Underwear</a>
+                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Underwear</a> -->
                 </div>
 
                 <div class="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
@@ -33,7 +35,8 @@ export default {
                         <p class="text-gray-500 dark:text-gray-300">6 Items</p>
                         <div class="flex items-center">
                             <p class="text-gray-500 dark:text-gray-300">Sort</p>
-                            <select class="font-medium text-gray-700 bg-transparent dark:text-gray-500 focus:outline-none">
+                            <select
+                                class="font-medium text-gray-700 bg-transparent dark:text-gray-500 focus:outline-none">
                                 <option value="#">Recommended</option>
                                 <option value="#">Size</option>
                                 <option value="#">Price</option>
@@ -41,7 +44,7 @@ export default {
                         </div>
                     </div>
 
-                    <Products/>
+                    <Products />
 
                     <!-- <div class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         
@@ -52,7 +55,7 @@ export default {
                             <Product price="98.45" title="Lampe Plafonia en cuivre" Pic="src\assets\lamps\LANTERNE_1.jpg"/>
                             <Product price="120.79" title="LANTERNE 6 FACES" Pic="src\assets\lamps\lanterne-6-faces-msdsa-.jpg"/> -->
 
-                                <!-- <template slot="p_pic">
+                    <!-- <template slot="p_pic">
                                     
                                     <img class="object-cover w-full rounded-md h-72 xl:h-80" src="src\assets\gerab.jpg" alt="T-Shirt">
                                 </template>
@@ -63,9 +66,9 @@ export default {
                                     <span class="text-gray-700 dark:text-gray-500">$20</span>
                                 </template>
                             </Product> -->
-                        
-                        
-                        <!-- <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
+
+
+                    <!-- <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
                             <img class="object-cover w-full rounded-md h-72 xl:h-80" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="T-Shirt">
                             <h4 class="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">Printed T-shirt</h4>
                             <p class="text-blue-500">$12.55</p>
@@ -117,7 +120,7 @@ export default {
                             </button>
                         </div> -->
 
-                        <!-- <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
+                    <!-- <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
                             <slot name="p_pic"></slot>
                             <img class="object-cover w-full rounded-md h-72 xl:h-80" src="https://images.unsplash.com/photo-1603320410149-db26b12d5c2b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="T-Shirt">
                             <h4 class="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200"><slot name="p_name"></slot></h4>

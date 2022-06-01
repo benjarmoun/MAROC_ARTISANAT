@@ -20,6 +20,29 @@ class Products
         $this->conn = $db;
     }
 
+    // getProductByID
+    public function getProductByID() {
+        // Create Query
+        $query = 'SELECT
+                    id, seller_id, category_id, name, price, description, picture
+                FROM
+                    ' . $this->table . '
+                WHERE
+                    id = :id';
+        
+        // Prepare Statement
+        $stmt = $this->conn->prepare($query);
+
+        // Bind ID
+        $stmt->bindParam(':id', $this->id);
+        // echo $this->id;
+
+        // Execute query
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     // Get products
     public function read()
@@ -28,7 +51,7 @@ class Products
         $query = 'SELECT
             id,
             seller_id,
-            -- category_id,
+            category_id,
             name,
             price,
             description,
@@ -229,6 +252,7 @@ class Products
         return $stmt;
     }
 
+    
 
     
 
