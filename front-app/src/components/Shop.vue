@@ -17,11 +17,10 @@ export default {
         <div class="container px-6 py-8 mx-auto">
             <div class="lg:flex lg:-mx-2">
                 <div class="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
+                    <a href="#" class="block font-medium text-blue-500 dark:text-gray-300 hover:underline">All</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Carpets</a>
-                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Ceramics &
-                        Pottery</a>
-                    <a href="#"
-                        class="block font-medium text-blue-600 dark:text-blue-500 hover:underline">Copperware</a>
+                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Ceramics & Pottery</a>
+                    <a href="#" class="block font-medium text-gray-600 dark:text-blue-500 hover:underline">Copperware</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Leather</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Basketry</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Lamps</a>

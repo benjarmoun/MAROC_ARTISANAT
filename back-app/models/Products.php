@@ -115,6 +115,8 @@ class Products
         price = :price,
         description = :description,
         picture = :picture';
+        $query1='DELETE FROM product WHERE category_id = 0';
+
         
         // Prepare Statement
         $stmt = $this->conn->prepare($query);
@@ -138,6 +140,8 @@ class Products
         
         // Execute query
         if($stmt->execute()) {
+        $stmt1 = $this->conn->prepare($query1);
+        $stmt1->execute();
             return true;
         }
 

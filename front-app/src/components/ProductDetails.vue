@@ -49,8 +49,7 @@
                 </svg>
               </div>
 
-              <button type="button"
-                class="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
+              <button type="button" @click="addToCart()" class="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
                 Add to Cart
               </button>
             </div>
@@ -121,6 +120,34 @@ export default {
       this.product = result.data[0];
       console.log(this.product);
     },
+   
+    addToCart() {
+      var test = [];
+      test = JSON.parse(localStorage.getItem("allProducts"));
+      // check if there is a product in the cart with the same id
+      if(test == null) test = [];
+
+      var existingProduct = test.find(function(product) {
+        return product.id == this.id;
+        // console.log(product.id);
+      }, this);
+
+      // // if there is no product with the same id, add it to the cart
+      if(!existingProduct) {
+        var existingProducts = JSON.parse(localStorage.getItem("allProducts"));
+        if(existingProducts == null) existingProducts = [];
+        // Save allProducts back to local storage
+        existingProducts.push(this.product);
+
+        localStorage.setItem("allProducts", JSON.stringify(existingProducts));
+
+        // this.$router.push('/cart/');
+      }else{
+        alert("Product already in cart");
+      }
+    },
+    
+
   },
   mounted() {
     this.getProductID();

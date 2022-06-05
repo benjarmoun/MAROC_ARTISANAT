@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="max-w-2xl mx-auto bg-white p-16">
-            <form @submit="addProduct">
+            <form @submit="addProduct" >
                 <div class="mb-6">
                     <label for="title"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
@@ -111,8 +111,9 @@ export default {
             
         // },
 
-        async addProduct(){
-
+        async addProduct(ev){
+            ev.preventDefault();    
+            console.log("test")
             let result = await axios.post(
                 "http://localhost/MAROC_ARTISANAT/back-app/addProduct",
                 {

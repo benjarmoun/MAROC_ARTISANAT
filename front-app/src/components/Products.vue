@@ -1,15 +1,7 @@
 <template>
     <div class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        
-        <!-- <Product price="12.34" title="LAMPE DITIA" Pic="src\assets\lamps\lampe-dite-ditia-.jpg"/>
-        <Product price="75.34" title="LAMPE GOUTTE D’EAU" Pic="src\assets\lamps\lampe-marocaine-goutte-deau3-300x300.jpg"/>
-        <Product price="98.45" title="Lampe Plafonia en cuivre" Pic="src\assets\lamps\LANTERNE_1.jpg"/>
-        <Product price="120.79" title="LANTERNE 6 FACES" Pic="src\assets\lamps\lanterne-6-faces-msdsa-.jpg"/>
-        <Product price="98.45" title="Lampe Plafonia en cuivre" Pic="src\assets\lamps\LANTERNE_1.jpg"/> -->
-        <!-- <Product price="120.79" title="LANTERNE 6 FACES" pic="carpet-vintage azilal.jpg"/> -->
 
         <product @click="details(product.id)" v-for="product in products" :price="product.price" :title="product.name" :pic="product.picture" />
-
 
         <!-- <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto" v-for="pr in products" :key="pr.id">
             <router-link :to="'/ProductDetails/'+pr.id"> 
@@ -41,31 +33,11 @@ export default {
     },
     data() {
         return {
-            // pict: "gerab.jpg",
-            products: [
-                // {
-                //     id: 1,
-                //     title: 'LAMPE DITIA',
-                //     price: 12.34,
-                //     Pic: 'lanterne-6-faces-msdsa-.jpg'
-                // },
-                // {
-                //     id: 2,
-                //     title: 'LAMPE GOUTTE D’EAU',
-                //     price: 75.34,
-                //     Pic: 'src\assets\lamps\lanterne-6-faces-msdsa-.jpg'
-                // },
-                // {
-                //     id: 3,
-                //     title: 'Lampe Plafonia en cuivre',
-                //     price: 98.45,
-                //     Pic: 'src\assets\lamps\LANTERNE_1.jpg'
-                // },
-                ]
+            products: [],
         }
     },
     methods: {
-        async getProduct(){
+        async getAllProduct(){
 
             let result = await axios.get(
                 "http://localhost/MAROC_ARTISANAT/back-app/getproducts",
@@ -73,11 +45,8 @@ export default {
             );
             
             this.products = result.data;
-            console.log(result.data);
+            // console.log(result.data);
         },
-        // details(id){
-        //     console.log(id);
-        // },
 
         details(id){
             this.$router.push({
@@ -93,7 +62,7 @@ export default {
         },
     },
     mounted() {
-        this.getProduct();
+        this.getAllProduct();
     },
 }
 </script>

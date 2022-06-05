@@ -6,7 +6,7 @@
 				<!-- Row -->
 				<div class="w-full xl:w-3/4 lg:w-11/12 flex justify-center items-center h-screen">
 					<!-- Col -->
-					<div class="w-full h-auto  hidden lg:block lg:w-5/12 bg-cover rounded-l-lg">
+					<div class="w-full border-radius:inherit h-auto  hidden lg:block lg:w-5/12 bg-cover rounded-l-lg">
                         <img src="..\assets\gerab.jpg" alt="">
                     </div>
 					<!-- Col -->

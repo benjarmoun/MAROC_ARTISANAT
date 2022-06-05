@@ -5,11 +5,11 @@ const store = createStore({
   state: {
     prod: "test",
     product: {
-      name: 'test1',
-      price: 9999,
-      description: 'lorem ipsum dolor sit amet  consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      pic: 'pottery-Service De Café.jpg',
-      category: '',
+      name: 'LAMPE DITIA',
+      price: 22,
+      description: 'lampe marocaine en suspension en métal teinté ‘ditia’ découpé à la main et verre coloré, faite à la main, design inspiré de l’art de décoration orientale (L65cm×Ø28cm)',
+      pic: 'lampe-dite-ditia-.jpg',
+      category: 'Copperware',
       quantity: 0,
       id: ''
     }
@@ -18,10 +18,10 @@ const store = createStore({
   },
   getters: {},
 
-  actions: {
+  mutations: {
 
   },
-  mutations: {
+  actions: {
 
   },
   modules: {},
