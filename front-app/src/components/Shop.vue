@@ -1,14 +1,50 @@
 <script>
 import Product from "./Product.vue"
 import Products from "./Products.vue"
+import store from "../store/index"
+import { mapActions } from 'vuex';
+import router from "../router";
 
 export default {
     name: 'Shop',
     components: {
         Product,
         Products,
-    }
+    },
+    methods: {
+        conso(){
+            console.log(store.state.products);
+        },
+        
+        carpet() {
+            store.commit ="0";
+            this.getProductByCategory(4).then(result => {
+                this.products = store.state.products;
+                
+            })
+            
+        },
+        all() {
+            store.commit ="1";
+            
+        },
+        ...mapActions([
+            'getAllProducts',
+            'getProductByCategory',
+        ]),   
+        Category(id){
+            this.getProductByCategory(id).then(result => {
+                this.products = store.state.products;
+                router.push({
+                    name: 'shop',
+                    
+                })
+            })
+        },   
+    },
+    
 }
+
 </script>
 
 <template>
@@ -18,8 +54,8 @@ export default {
             <div class="lg:flex lg:-mx-2">
                 <div class="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
                     <a href="#" class="block font-medium text-blue-500 dark:text-gray-300 hover:underline">All</a>
-                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Carpets</a>
-                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Ceramics & Pottery</a>
+                    <a @click="carpet()"  class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Carpets</a>
+                    <a @click="conso() " class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Ceramics & Pottery</a>
                     <a href="#" class="block font-medium text-gray-600 dark:text-blue-500 hover:underline">Copperware</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Leather</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Basketry</a>

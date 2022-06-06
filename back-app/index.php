@@ -20,7 +20,10 @@ $pages = ['addProduct','getproducts','updateProduct','deleteProduct','getProduct
                 if(method_exists($prod, $page)){
                     if ($page == 'getProductID') {
                         $prod->getProductID($parts[1]);
-                        // echo $parts[1];
+
+                    }elseif ($page == 'getProductByCategory') {
+                        $prod->getProductByCategory($parts[1]);
+
                     }else{
                         $prod->$page();
                     }

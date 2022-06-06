@@ -22,8 +22,9 @@
 
 
 <script>
-import axios from 'axios';
+import store from '../store/index';
 import Product from "./Product.vue"
+import { mapActions } from 'vuex';
 
 export default {
 
@@ -33,28 +34,19 @@ export default {
     },
     data() {
         return {
-            products: [],
+            products:"",
         }
     },
     methods: {
-        async getAllProduct(){
-
-            let result = await axios.get(
-                "http://localhost/MAROC_ARTISANAT/back-app/getproducts",
-                
-            );
-            
-            this.products = result.data;
-            // console.log(result.data);
-        },
+        ...mapActions([
+            'getAllProducts',
+            'getProductByCategory',
+        ]),
 
         details(id){
             this.$router.push({
                 name: 'ProductDetails',
-                // props: {
-                //     // id: this.product.id
-                //     id: id
-                // },
+                
                 params: {
                     id: id
                 }
@@ -62,7 +54,25 @@ export default {
         },
     },
     mounted() {
-        this.getAllProduct();
+        console.log(store.state.products);
+        if(store.state.choice == '1'){
+            this.getAllProducts().then(result => {
+    
+                this.products = store.state.products;
+                console.log(this.products);
+                // return store.state.products;
+    
+            })
+            // console.log(this.getAllProducts());
+        }
+        else if(store.state.choice == '0'){
+            this.getProductByCategory(4).then(result => {
+    
+                this.products = store.state.products;
+                // return store.state.products;
+    
+            })
+        }
     },
 }
 </script>

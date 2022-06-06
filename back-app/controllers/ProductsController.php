@@ -184,7 +184,7 @@ class ProductsController{
     }
 
     // get product by category
-    public function getProductByCategory(){
+    public function getProductByCategory($id){
         // Instantiate DB & connect
         $database = new Database();
         $db = $database->connect();
@@ -192,46 +192,17 @@ class ProductsController{
         // Instantiate product object
         $product = new Products($db);
 
-        // Get raw posted data
-        $data = json_decode(file_get_contents("php://input"));
-
-        if($data) {
-            $product->category_id = $data->category_id;
+        // Get id
+        {
+            $product->category_id = $id;
         }
 
         // Get product by category
         $result = $product->getProductByCategory();
 
-        // Get row count
-        $num = $result->rowCount();
-
-        // Check if any products
-        if($num > 0) {
-            // Cat array
-            $prod_arr = array();
-            $prod_arr['data'] = array();
-
-            while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                extract($row);
-
-                $prod_item = array(
-                'id' => $id,
-                'seller_id' => $seller_id,
-                'category_id' => $category_id,
-                'name' => $name,
-                'price' => $price,
-                'description' => $description,
-                'picture' => $picture,
-                );
-
-                // Push to "data"
-                array_push($prod_arr['data'], $prod_item);
-            }
-            die(print_r($prod_arr));
-
+        if ($result) {
             // Turn to JSON & output
-            echo json_encode($prod_arr);
-
+            echo json_encode($result);
         } else {
             // No products
             echo json_encode(

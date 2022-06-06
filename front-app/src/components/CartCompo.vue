@@ -56,13 +56,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- element 2 -->
+
                    
-
-
-
-
         <!-- <div class="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
           <div class="md:w-4/12 2xl:w-1/4 w-full">
             <img src="https://i.ibb.co/c6KyDXN/Rectangle-5-1.png" alt="Gray Sneakers" class="h-full object-center object-cover md:block hidden" />
@@ -121,14 +116,14 @@
 
                 <!-- SUMMARY -->
                 <div class="lg:w-96 md:w-8/12 w-full bg-gray-100 dark:bg-gray-900 h-full">
-                    <div class="flex flex-col lg:h-screen h-auto lg:px-8 md:px-7 px-4 lg:py-20 md:py-10 py-6 ">
+                    <div class="flex flex-col h-auto lg:px-8 md:px-7 px-4 lg:py-10 md:py-10 py-6 ">
                         <div>
                             <p class="lg:text-4xl text-3xl font-black leading-9 text-gray-800 dark:text-white">Summary
                             </p>
                             <!-- SUMMARY PRODUCT NAME AND PRICE -->
-                            <div v-for="product in this.cart" class="flex items-center justify-between pt-16">
+                            <div v-for="product in this.cart" class="flex items-center justify-between pt-10">
                                 <!-- <p class="text-base leading-none text-gray-800 dark:text-white">Subtotal</p> -->
-                                <p class="text-base leading-none text-gray-800 dark:text-white">{{product.name}}</p>
+                                <p class="text-base leading-none text-gray-800 dark:text-white">- {{product.name}}</p>
                                 <p class="text-base leading-none text-gray-800 dark:text-white">${{product.price}}</p>
                             </div>
                             <div class="flex items-center justify-between pt-5">
@@ -162,15 +157,11 @@ import store from '../store'
 export default {
     data() {
         return {
-            pic: store.state.product.pic,
+            // pic: store.state.product.pic,
             // pic: "basket-panier-berbere-noir-1.jpg",
             Tprice: 0,
             cart: [],
-            total: 0,
             cartItems: 0,
-            shipping: 0,
-            tax: 0,
-            grandTotal: 0,
             cartItem: {
                 product: {},
                 quantity: 0,
@@ -181,34 +172,6 @@ export default {
     },
     props: {
 
-        // cart: {
-        //     type: Array,
-        //     // required: true
-        // },
-        // total: {
-        //     type: Number,
-        //     // required: true
-        // },
-        // cartItems: {
-        //     type: Number,
-        //     // required: true
-        // },
-        // shipping: {
-        //     type: Number,
-        //     // required: true
-        // },
-        // tax: {
-        //     type: Number,
-        //     // required: true
-        // },
-        // grandTotal: {
-        //     type: Number,
-        //     // required: true
-        // },
-        // cartItem: {
-        //     type: Object,
-        //     // required: true
-        // }
     },
 
     methods: {
@@ -224,44 +187,18 @@ export default {
         localStorage.setItem("allProducts", JSON.stringify(existingProducts));
         
         this.cart = JSON.parse(localStorage.getItem('allProducts'));
+        this.total 
+        this.calculateTotal();
 
         
         }
-    },
-
-        
-        // addToCart(item) {
-        //     this.cartItem.product = item
-        //     this.cartItem.quantity = 1
-        //     this.cartItem.price = item.price
-        //     this.cartItem.total = this.cartItem.quantity * this.cartItem.price
-        //     this.cart.push(this.cartItem)
-        //     this.cartItem = {
-        //         product: {},
-        //         quantity: 0,
-        //         price: 0,
-        //         total: 0
-        //     }
-        //     this.calculateTotal()
-        // },
-        // addToCart(item) {
-        //     this.cart.push(item);
-        //     this.calculateTotal();
-        // },
-        // removeFromCart(item) {
-        //     this.cart.splice(this.cart.indexOf(item), 1);
-        //     this.calculateTotal();
-        // },
-        calculateTotal() {
-            this.total = 0;
-            this.cart.forEach(item => {
-                this.Tprice += item.price;
-            });
-            // this.cartItems = this.cart.length;
-            // this.shipping = 0;
-            // this.tax = 0.1 * this.total;
-            // this.grandTotal = this.total + this.shipping + this.tax;
-        }
+      },
+      calculateTotal() {
+          this.Tprice = 0;
+          this.cart.forEach(item => {
+              this.Tprice += item.price;
+          });
+      }
     },
     mounted() {
         // console.log(store.state);
@@ -273,9 +210,9 @@ export default {
         this.calculateTotal();
 
 
-        (this.cart, function(item) {
-            this.Tprice += item.price;
-        });
+        // (this.cart, function(item) {
+        //     this.Tprice += item.price;
+        // });
 
         // console.log(this.cart);
     },
