@@ -257,6 +257,34 @@ class Products
         return $result?$result:false;
     }
 
+    public function getProductByCategoryName($category_name) {
+        // Create Query
+        $query = 'SELECT
+            p.id,
+            p.seller_id,
+            p.category_id,
+            p.name,
+            p.price,
+            p.description,
+            p.picture
+        
+        FROM category c INNER JOIN product p on p.category_id=c.category_id WHERE c.name=?
+        ORDER BY
+            p.price';
+        
+        // Prepare Statement
+        $stmt = $this->conn->prepare($query);
+
+        // Bind ID
+        $stmt->bindParam(1, $category_name);
+
+        // Execute query
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result?$result:false;
+    }
+
     
 
 }

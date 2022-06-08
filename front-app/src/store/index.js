@@ -24,6 +24,11 @@ const store = createStore({
       // state.choice = "0";
       state.products = products;
       console.log(state.products);
+    },
+    setProductByCategoryName(state, products) {
+      // state.choice = "0";
+      state.products = products;
+      console.log(state.products);
     }
 
   },
@@ -45,6 +50,24 @@ const store = createStore({
       commit("setProductByCategory", result.data);
       // console.log(result.data);
       return result.data;
+  },
+  async getProductByCategoryName({ commit }, C_Name) {
+    if(C_Name==""){
+      let result = await axios.get(
+        "http://localhost/MAROC_ARTISANAT/back-app/getproducts",
+        
+    );
+      commit("setProducts", result.data);
+      return result.data;
+    }else{
+    let result = await axios.get(
+      "http://localhost/MAROC_ARTISANAT/back-app/getProductByCategoryName/" + C_Name,
+      
+  );
+    commit("setProductByCategory", result.data);
+    // console.log(result.data);
+    return result.data;
+}
   }
 },
 

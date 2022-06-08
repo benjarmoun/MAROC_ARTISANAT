@@ -210,4 +210,31 @@ class ProductsController{
             );
         }
     }
+
+    public function getProductByCategoryName($C_Name){
+        // Instantiate DB & connect
+        $database = new Database();
+        $db = $database->connect();
+
+        // Instantiate product object
+        $product = new Products($db);
+
+        // Get id
+        // {
+        //     $product->category_id = $id;
+        // }
+
+        // Get product by category
+        $result = $product->getProductByCategoryName($C_Name);
+
+        if ($result) {
+            // Turn to JSON & output
+            echo json_encode($result);
+        } else {
+            // No products
+            echo json_encode(
+                array('message' => 'No products Found')
+            );
+        }
+    }
 }

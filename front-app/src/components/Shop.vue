@@ -5,19 +5,37 @@
         <div class="container px-6 py-8 mx-auto">
             <div class="lg:flex lg:-mx-2">
                 <div class="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
-                    <a @click="all()" class="block font-medium text-blue-500 dark:text-gray-300 hover:cursor-pointer hover:underline">All</a>
-                    <!-- cursor-pointer on hover -->
-
-                    <a @click="carpet()"  class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Carpets</a>
-                    <a @click="getByCat(2)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Ceramics & Pottery</a>
+                    <router-link to="/shop" class="my-2" >
+                        <a @click="all()" class="block font-medium text-blue-500 dark:text-gray-300 hover:cursor-pointer hover:underline">All</a>
+                    </router-link>
+                    <router-link to="/shop/carpets" >
+                        <a @click="test('carpets')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Carpets</a>
+                    </router-link>
+                    <router-link to="/shop/Pottery" >
+                        <a @click="test('Pottery')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Ceramics & Pottery</a>
+                    </router-link>
+                    <router-link to="/shop/Copperware" >
+                        <a @click="test('Copperware')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Copperware</a>
+                    </router-link>
+                    <router-link to="/shop/Leather" >
+                        <a @click="test('Leather')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Leather</a>
+                    </router-link>
+                    <router-link to="/shop/Basketry" >
+                        <a @click="test('Basketry')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Basketry</a>
+                    </router-link>
+                    <router-link to="/shop/Lamps" >
+                        <a @click="test('Lamps')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Lamps</a>
+                    </router-link>
+                    <!-- <a @click="getByCat(1)"  class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Carpets</a> -->
+                    <!-- <a @click="getByCat(2)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Ceramics & Pottery</a> -->
                     <!-- <router-link to="1"><p @click="carpet()"> test</p></router-link><br>
                     <router-link to="4">Folololo</router-link> -->
-                    <a @click="getByCat(4)" class="block font-medium text-gray-600 dark:text-gray-300 hover:cursor-pointer hover:underline">Copperware</a>
-                    <a @click="getByCat(5)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Leather</a>
-                    <!-- <router-link to="7" >
-                        <a @click="carpet()" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Basketry</a>
+                    <!-- <a @click="getByCat(4)" class="block font-medium text-gray-600 dark:text-gray-300 hover:cursor-pointer hover:underline">Copperware</a> -->
+                    <!-- <a @click="getByCat(5)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Leather</a> -->
+                    <!-- <router-link to="carpets" >
+                        <a @click="test()" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Basketry</a>
                     </router-link> -->
-                    <a @click="getByCat(6)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Lamps</a>
+                    <!-- <a @click="getByCat(6)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Lamps</a> -->
                     <!-- <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Trousers</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Shorts</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Underwear</a> -->
@@ -25,7 +43,7 @@
 
                 <div class="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
                     <div class="flex items-center justify-between text-sm tracking-widest uppercase ">
-                        <p class="text-gray-500 dark:text-gray-300">6 Items</p>
+                        <p class="text-gray-500 dark:text-gray-300">{{products.length}} Items</p>
                         <div class="flex items-center">
                             <p class="text-gray-500 dark:text-gray-300">Sort</p>
                             <select
@@ -144,7 +162,6 @@
                 products: [],
             }
         },
-        
         components: {
             Product,
             Products,
@@ -163,6 +180,11 @@
             carpet() {
                 // store.commit ="0";
                 this.getProductByCategory(1).then(result => {
+                    this.products = store.state.products;  
+                })
+            },
+            test(name){
+                this.getProductByCategoryName(name).then(result => {
                     this.products = store.state.products;  
                 })
             },
@@ -192,6 +214,7 @@
             ...mapActions([
                 'getAllProducts',
                 'getProductByCategory',
+                'getProductByCategoryName'
             ]),   
             // Category(id){
             //     this.getProductByCategory(id).then(result => {
@@ -205,7 +228,20 @@
         },
 
         mounted() {
-            this.all();
+            // this.all();
+            // console.log(this.$route.params.category)
+            if(this.$route.params.category){
+                // console.log("kin")
+                
+                this.test(this.$route.params.category);
+            }else
+            {
+                this.all();
+                // console.log("makinsh")
+
+            }
+
+            // this.all();
         },
         
     }
