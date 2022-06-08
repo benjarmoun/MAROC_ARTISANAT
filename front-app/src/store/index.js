@@ -8,6 +8,7 @@ const store = createStore({
     prod: "test",
     products: [],
     choice: "1",
+    category_id: "",
   
 
 

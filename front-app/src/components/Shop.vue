@@ -1,51 +1,3 @@
-<script>
-import Product from "./Product.vue"
-import Products from "./Products.vue"
-import store from "../store/index"
-import { mapActions } from 'vuex';
-import router from "../router";
-
-export default {
-    name: 'Shop',
-    components: {
-        Product,
-        Products,
-    },
-    methods: {
-        conso(){
-            console.log(store.state.products);
-        },
-        
-        carpet() {
-            store.commit ="0";
-            this.getProductByCategory(4).then(result => {
-                this.products = store.state.products;
-                
-            })
-            
-        },
-        all() {
-            store.commit ="1";
-            
-        },
-        ...mapActions([
-            'getAllProducts',
-            'getProductByCategory',
-        ]),   
-        Category(id){
-            this.getProductByCategory(id).then(result => {
-                this.products = store.state.products;
-                router.push({
-                    name: 'shop',
-                    
-                })
-            })
-        },   
-    },
-    
-}
-
-</script>
 
 <template>
     <!-- component -->
@@ -53,13 +5,19 @@ export default {
         <div class="container px-6 py-8 mx-auto">
             <div class="lg:flex lg:-mx-2">
                 <div class="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
-                    <a href="#" class="block font-medium text-blue-500 dark:text-gray-300 hover:underline">All</a>
-                    <a @click="carpet()"  class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Carpets</a>
-                    <a @click="conso() " class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Ceramics & Pottery</a>
-                    <a href="#" class="block font-medium text-gray-600 dark:text-blue-500 hover:underline">Copperware</a>
-                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Leather</a>
-                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Basketry</a>
-                    <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Lamps</a>
+                    <a @click="all()" class="block font-medium text-blue-500 dark:text-gray-300 hover:cursor-pointer hover:underline">All</a>
+                    <!-- cursor-pointer on hover -->
+
+                    <a @click="carpet()"  class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Carpets</a>
+                    <a @click="getByCat(2)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Ceramics & Pottery</a>
+                    <!-- <router-link to="1"><p @click="carpet()"> test</p></router-link><br>
+                    <router-link to="4">Folololo</router-link> -->
+                    <a @click="getByCat(4)" class="block font-medium text-gray-600 dark:text-gray-300 hover:cursor-pointer hover:underline">Copperware</a>
+                    <a @click="getByCat(5)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Leather</a>
+                    <!-- <router-link to="7" >
+                        <a @click="carpet()" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Basketry</a>
+                    </router-link> -->
+                    <a @click="getByCat(6)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Lamps</a>
                     <!-- <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Trousers</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Shorts</a>
                     <a href="#" class="block font-medium text-gray-500 dark:text-gray-300 hover:underline">Underwear</a> -->
@@ -79,17 +37,17 @@ export default {
                         </div>
                     </div>
 
-                    <Products />
+                    <!-- <Products /> -->
 
-                    <!-- <div class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        <product @click="details(product.id) " v-for="product in products" :price="product.price" :title="product.name" :pic="product.picture" />
                         
-                            <Product price="12.34" title="LAMPE DITIA" Pic="src\assets\lamps\lampe-dite-ditia-.jpg"/>
+                            <!-- <Product price="12.34" title="LAMPE DITIA" Pic="src\assets\lamps\lampe-dite-ditia-.jpg"/>
                             <Product price="75.34" title="LAMPE GOUTTE D’EAU" Pic="src\assets\lamps\lampe-marocaine-goutte-deau3-300x300.jpg"/>
                             <Product price="98.45" title="Lampe Plafonia en cuivre" Pic="src\assets\lamps\LANTERNE_1.jpg"/>
                             <Product price="120.79" title="LANTERNE 6 FACES" Pic="src\assets\lamps\lanterne-6-faces-msdsa-.jpg"/>
                             <Product price="98.45" title="Lampe Plafonia en cuivre" Pic="src\assets\lamps\LANTERNE_1.jpg"/>
                             <Product price="120.79" title="LANTERNE 6 FACES" Pic="src\assets\lamps\lanterne-6-faces-msdsa-.jpg"/> -->
-
                     <!-- <template slot="p_pic">
                                     
                                     <img class="object-cover w-full rounded-md h-72 xl:h-80" src="src\assets\gerab.jpg" alt="T-Shirt">
@@ -101,8 +59,6 @@ export default {
                                     <span class="text-gray-700 dark:text-gray-500">$20</span>
                                 </template>
                             </Product> -->
-
-
                     <!-- <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
                             <img class="object-cover w-full rounded-md h-72 xl:h-80" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="T-Shirt">
                             <h4 class="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">Printed T-shirt</h4>
@@ -154,7 +110,6 @@ export default {
                                 <span class="mx-1">Add to cart</span>
                             </button>
                         </div> -->
-
                     <!-- <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
                             <slot name="p_pic"></slot>
                             <img class="object-cover w-full rounded-md h-72 xl:h-80" src="https://images.unsplash.com/photo-1603320410149-db26b12d5c2b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="T-Shirt">
@@ -168,15 +123,91 @@ export default {
                                 <span class="mx-1">Add to cart</span>
                             </button>
                         </div> -->
-                    <!-- </div> -->
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </template>
-<!-- 
+
 <script>
+    import Product from "./Product.vue"
+    import Products from "./Products.vue"
+    import store from "../store/index"
+    import { mapActions } from 'vuex';
+    import router from "../router";
+    
     export default {
         name: 'Shop',
-    };
-</script> -->
+        data() {
+            return {
+                products: [],
+            }
+        },
+        
+        components: {
+            Product,
+            Products,
+        },
+        methods: {
+            conso(){
+                console.log(this.category);
+                // console.log(store.state.products);
+            },
+            getByCat(id) {
+                // store.commit ="0";
+                this.getProductByCategory(id).then(result => {
+                    this.products = store.state.products;  
+                })
+            },
+            carpet() {
+                // store.commit ="0";
+                this.getProductByCategory(1).then(result => {
+                    this.products = store.state.products;  
+                })
+            },
+            basketry(){
+                store.commit ="0";
+                this.getProductByCategory(7).then(result => {
+                    this.products = store.state.products;
+                    
+                })
+            },
+            all() {
+                this.getAllProducts().then(result => {
+    
+                this.products = store.state.products;
+                console.log(this.products);
+                // return store.state.products;
+            })  
+            },
+            details(id){
+                this.$router.push({
+                    name: 'ProductDetails',
+                    params: {
+                        id: id
+                    }
+                })
+            },
+            ...mapActions([
+                'getAllProducts',
+                'getProductByCategory',
+            ]),   
+            // Category(id){
+            //     this.getProductByCategory(id).then(result => {
+            //         this.products = store.state.products;
+            //         router.push({
+            //             name: 'shop',
+                        
+            //         })
+            //     })
+            // },   
+        },
+
+        mounted() {
+            this.all();
+        },
+        
+    }
+
+</script>

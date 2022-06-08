@@ -1,7 +1,7 @@
 
 <template> 
     <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto cursor-pointer hover:shadow-2xl">
-        <img :src='"src/assets/"+this.pic' class="object-cover w-full rounded-md h-72 xl:h-80" alt="T-Shirt">
+        <img :src='"src/assets/"+this.pic' class="object-cover w-full rounded-md h-72 xl:h-80">
         <h4 class="mt-2 text-lg font-medium text-gray-700 dark:text-gray-200">{{title}}</h4>
         <p class="text-blue-500">${{price}}</p>
 

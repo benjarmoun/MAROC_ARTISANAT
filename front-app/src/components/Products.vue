@@ -1,7 +1,7 @@
 <template>
     <div class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
-        <product @click="details(product.id)" v-for="product in products" :price="product.price" :title="product.name" :pic="product.picture" />
+        <product @click="conso() " v-for="product in products" :price="product.price" :title="product.name" :pic="product.picture" />
 
         <!-- <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto" v-for="pr in products" :key="pr.id">
             <router-link :to="'/ProductDetails/'+pr.id"> 
@@ -25,6 +25,8 @@
 import store from '../store/index';
 import Product from "./Product.vue"
 import { mapActions } from 'vuex';
+import router from "../router";
+
 
 export default {
 
@@ -34,14 +36,20 @@ export default {
     },
     data() {
         return {
+            category: this.$route.params.category,
             products:"",
         }
     },
     methods: {
+        conso(){
+                console.log(this.category);
+                // console.log(store.state.products);
+            },
         ...mapActions([
             'getAllProducts',
             'getProductByCategory',
         ]),
+
 
         details(id){
             this.$router.push({
@@ -55,24 +63,27 @@ export default {
     },
     mounted() {
         console.log(store.state.products);
-        if(store.state.choice == '1'){
-            this.getAllProducts().then(result => {
+        // if(store.state.choice == '1'){
+        //     this.getAllProducts().then(result => {
+    
+        //         this.products = store.state.products;
+        //         console.log(this.products);
+        //         // return store.state.products;
+    
+        //     })
+        //     // console.log(this.getAllProducts());
+        // }
+        // else if(store.state.choice == '0'){
+
+            store.state.category_id = this.$route.params.category,
+            this.getProductByCategory(store.state.category_id).then(result => {
+                console.log(store.state.category_id);
     
                 this.products = store.state.products;
-                console.log(this.products);
                 // return store.state.products;
     
             })
-            // console.log(this.getAllProducts());
-        }
-        else if(store.state.choice == '0'){
-            this.getProductByCategory(4).then(result => {
-    
-                this.products = store.state.products;
-                // return store.state.products;
-    
-            })
-        }
+        // }
     },
 }
 </script>

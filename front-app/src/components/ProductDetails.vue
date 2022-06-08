@@ -5,7 +5,7 @@
 
     <div class="py-6">
 
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6"  :key="product.id">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6" >
         <div class="flex flex-col md:flex-row -mx-4">
           <div class="md:flex-1 px-4">
             <img :src='"../src/assets/" + product.picture' class="h-64 md:h-80 rounded-lg bg-gray-100 m-auto" alt="">
