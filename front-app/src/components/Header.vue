@@ -13,7 +13,7 @@ export default {
     <div class="w-full px-4 mx-auto leading-10 text-center md:px-4 lg:px-6 max-w-7xl">
         <div class="box-border flex flex-col flex-wrap items-center justify-between text-indigo-900 md:flex-row">
             <div class="relative z-10 flex items-center w-auto px-4 leading-10 lg:flex-grow-0 lg:flex-shrink-0 lg:text-left">
-                <router-link to="#_" class="box-border inline-block font-sans text-2xl font-bold text-left text-indigo-900 no-underline bg-transparent cursor-pointer focus:no-underline">
+                <router-link to="/" class="box-border inline-block font-sans text-2xl font-bold text-left text-indigo-900 no-underline bg-transparent cursor-pointer focus:no-underline">
                     Maroc Artisan
                 </router-link>
             </div>

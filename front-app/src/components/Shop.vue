@@ -46,11 +46,12 @@
                         <p class="text-gray-500 dark:text-gray-300">{{products.length}} Items</p>
                         <div class="flex items-center">
                             <p class="text-gray-500 dark:text-gray-300">Sort</p>
-                            <select
-                                class="font-medium text-gray-700 bg-transparent dark:text-gray-500 focus:outline-none">
-                                <option value="#">Recommended</option>
-                                <option value="#">Size</option>
-                                <option value="#">Price</option>
+                            <select @change="sortBy($event)" class="font-medium text-gray-700 bg-transparent dark:text-gray-500 focus:outline-none">
+                                <option value="1">Price ascending</option>
+                                <option value="2">Price descending </option>
+                                <option value="3">Newest</option>
+                                <option value="4">Oldest</option>
+                                <option value="5">Name</option>
                             </select>
                         </div>
                     </div>
@@ -167,9 +168,26 @@
             Products,
         },
         methods: {
-            conso(){
-                console.log(this.category);
-                // console.log(store.state.products);
+            sortBy(event) {
+                switch(event.target.value) {
+                    case '1':
+                         this.products.sort((a, b) => (a.price > b.price) ? 1 : -1)
+                        break;
+                    case '2':
+                        this.products.sort((a, b) => (a.price < b.price) ? 1 : -1)
+                        break;
+                    case '3':
+                        this.products.sort((a, b) => (a.id > b.id) ? 1 : -1)
+                        break;
+                    case '4':
+                        this.products.sort((a, b) => (a.id < b.id) ? 1 : -1)
+                        break;
+                    case '5':
+                        this.products.sort((a, b) => (a.name > b.name) ? 1 : -1)
+                        break;
+                    default:
+                        break;
+                }
             },
             getByCat(id) {
                 // store.commit ="0";
