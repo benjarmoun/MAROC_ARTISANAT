@@ -5,26 +5,26 @@
         <div class="container px-6 py-8 mx-auto">
             <div class="lg:flex lg:-mx-2">
                 <div class="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
-                    <router-link to="/shop" class="my-2" >
-                        <a @click="all()" class="block font-medium text-blue-500 dark:text-gray-300 hover:cursor-pointer hover:underline">All</a>
+                    <router-link to="/shop">
+                        <a @click="all()" class="block font-medium text-blue-500 dark:text-gray-300 hover:cursor-pointer hover:underline my-4">All</a>
                     </router-link>
                     <router-link to="/shop/carpets" >
-                        <a @click="test('carpets')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Carpets</a>
+                        <a @click="test('carpets')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline my-4">Carpets</a>
                     </router-link>
                     <router-link to="/shop/Pottery" >
-                        <a @click="test('Pottery')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Ceramics & Pottery</a>
+                        <a @click="test('Pottery')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline my-4">Ceramics & Pottery</a>
                     </router-link>
                     <router-link to="/shop/Copperware" >
-                        <a @click="test('Copperware')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Copperware</a>
+                        <a @click="test('Copperware')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline my-4">Copperware</a>
                     </router-link>
                     <router-link to="/shop/Leather" >
-                        <a @click="test('Leather')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Leather</a>
+                        <a @click="test('Leather')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline my-4">Leather</a>
                     </router-link>
                     <router-link to="/shop/Basketry" >
-                        <a @click="test('Basketry')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Basketry</a>
+                        <a @click="test('Basketry')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline my-4">Basketry</a>
                     </router-link>
                     <router-link to="/shop/Lamps" >
-                        <a @click="test('Lamps')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Lamps</a>
+                        <a @click="test('Lamps')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline my-4">Lamps</a>
                     </router-link>
                     <!-- <a @click="getByCat(1)"  class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Carpets</a> -->
                     <!-- <a @click="getByCat(2)" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline">Ceramics & Pottery</a> -->
