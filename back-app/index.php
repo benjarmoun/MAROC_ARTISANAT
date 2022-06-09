@@ -1,5 +1,11 @@
 <?php
 // require_once './views/includes/header.php';
+// Headers
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: POST, DELETE, PUT');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
 require_once './autoload.php';
 require_once './controllers/HomeController.php';
 $home = new HomeController();
@@ -8,7 +14,7 @@ $user = new UserController();
 $cat = new CategoryController();
 
 
-$pages = ['addProduct','getproducts','updateProduct','getProductByCategoryName','deleteProduct','getProductByCategory','getCategories','addCategory','deleteCategory','auth','registerUser','deleteUser','getSingleUser','getUsers','login','updateUser','getProductID'];
+$pages = ['addProduct','getproducts','updateProduct','getProductBySeller','getProductByCategoryName','deleteProduct','getProductByCategory','getCategories','addCategory','deleteCategory','auth','registerUser','deleteUser','getSingleUser','getUsers','login','updateUser','getProductID'];
 // print_r($parts) ;
 // if(isset($_SESSION['log']) && $_SESSION['log'] === true){
     if(isset($_GET['page'])){
@@ -25,6 +31,8 @@ $pages = ['addProduct','getproducts','updateProduct','getProductByCategoryName',
                         $prod->getProductByCategory($parts[1]);
                     }elseif ($page == 'getProductByCategoryName') {
                         $prod->getProductByCategoryName($parts[1]);
+                    }elseif ($page == 'getProductBySeller') {
+                        $prod->getProductBySeller($parts[1]);
 
                     }else{
                         $prod->$page();

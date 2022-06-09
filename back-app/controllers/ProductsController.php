@@ -91,6 +91,7 @@ class ProductsController{
     // add product
     public function addProduct(){
         // Instantiate DB & connect
+        if($_SERVER['REQUEST_METHOD'] != 'POST') return;
         $database = new Database();
         $db = $database->connect();
 
@@ -199,6 +200,32 @@ class ProductsController{
 
         // Get product by category
         $result = $product->getProductByCategory();
+
+        if ($result) {
+            // Turn to JSON & output
+            echo json_encode($result);
+        } else {
+            // No products
+            echo json_encode(
+                array('message' => 'No products Found')
+            );
+        }
+    }
+
+    // get product by seller
+    public function getProductBySeller($id){
+        // Instantiate DB & connect
+        $database = new Database();
+        $db = $database->connect();
+
+        // Instantiate product object
+        $product = new Products($db);
+
+        // Get id
+        $product->seller_id = $id;
+
+        // Get product by seller
+        $result = $product->read_seller();
 
         if ($result) {
             // Turn to JSON & output

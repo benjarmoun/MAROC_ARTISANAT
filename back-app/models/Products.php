@@ -73,7 +73,7 @@ class Products
     }
 
     // Get products of one seller
-    public function read_seller($seller_id)
+    public function read_seller() 
     {
         // Create query
         $query = 'SELECT
@@ -93,12 +93,13 @@ class Products
         $stmt = $this->conn->prepare($query);
 
         // Bind ID
-        $stmt->bindParam(':seller_id', $seller_id);
+        $stmt->bindParam(':seller_id', $this->seller_id);
 
         // Execute query
         $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $stmt;
+        return $result?$result:false;
     }
 
 
@@ -115,7 +116,6 @@ class Products
         price = :price,
         description = :description,
         picture = :picture';
-        $query1='DELETE FROM product WHERE category_id = 0';
 
         
         // Prepare Statement
@@ -140,8 +140,6 @@ class Products
         
         // Execute query
         if($stmt->execute()) {
-        $stmt1 = $this->conn->prepare($query1);
-        $stmt1->execute();
             return true;
         }
 

@@ -28,7 +28,7 @@
             </div>
 
             <p class="text-gray-500">{{ product.description }} </p>
-            <img :src='"src/assets/" + this.pic' alt="">
+            <!-- <img :src='"src/assets/" + this.pic' alt=""> -->
             <div class="flex py-4 space-x-4">
               <div class="relative">
                 <div
@@ -113,12 +113,12 @@ export default {
         // "id": this.$route.params.id
         "id": this.id
       };
-      console.log(data.id);
+      // console.log(data.id);
       let result = await axios.get(
         'http://localhost/MAROC_ARTISANAT/back-app/getProductID/'+data.id
       );
       this.product = result.data[0];
-      console.log(this.product);
+      // console.log(this.product);
     },
    
     addToCart() {

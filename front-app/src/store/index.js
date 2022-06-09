@@ -7,9 +7,10 @@ const store = createStore({
   state: {
     prod: "test",
     products: [],
+    s_products: [],
     choice: "1",
     category_id: "",
-  
+
 
 
   },
@@ -23,12 +24,17 @@ const store = createStore({
     setProductByCategory(state, products) {
       // state.choice = "0";
       state.products = products;
-      console.log(state.products);
+      // console.log(state.products);
+    },
+    setProductBySeller(state, x) {
+      // state.choice = "0";
+      state.s_products = x;
+      // console.log(state.products);
     },
     setProductByCategoryName(state, products) {
       // state.choice = "0";
       state.products = products;
-      console.log(state.products);
+      // console.log(state.products);
     }
 
   },
@@ -36,40 +42,51 @@ const store = createStore({
     async getAllProducts({ commit }) {
       let result = await axios.get(
         "http://localhost/MAROC_ARTISANAT/back-app/getproducts",
-        
-    );
+
+      );
       commit("setProducts", result.data);
       return result.data;
-  },
+    },
 
     async getProductByCategory({ commit }, id) {
       let result = await axios.get(
         "http://localhost/MAROC_ARTISANAT/back-app/getProductByCategory/" + id,
-        
-    );
+
+      );
       commit("setProductByCategory", result.data);
       // console.log(result.data);
       return result.data;
-  },
-  async getProductByCategoryName({ commit }, C_Name) {
-    if(C_Name==""){
+    },
+
+    async getProductBySeller({ commit }, id) {
       let result = await axios.get(
-        "http://localhost/MAROC_ARTISANAT/back-app/getproducts",
-        
-    );
-      commit("setProducts", result.data);
+        'http://localhost/MAROC_ARTISANAT/back-app/getProductBySeller/'+id,
+
+      );
+      commit("setProductBySeller", result.data);
+      // console.log(result.data);
       return result.data;
-    }else{
-    let result = await axios.get(
-      "http://localhost/MAROC_ARTISANAT/back-app/getProductByCategoryName/" + C_Name,
-      
-  );
-    commit("setProductByCategory", result.data);
-    // console.log(result.data);
-    return result.data;
-}
-  }
-},
+    },
+
+    async getProductByCategoryName({ commit }, C_Name) {
+      if (C_Name == "") {
+        let result = await axios.get(
+          "http://localhost/MAROC_ARTISANAT/back-app/getproducts",
+
+        );
+        commit("setProducts", result.data);
+        return result.data;
+      } else {
+        let result = await axios.get(
+          "http://localhost/MAROC_ARTISANAT/back-app/getProductByCategoryName/" + C_Name,
+
+        );
+        commit("setProductByCategory", result.data);
+        // console.log(result.data);
+        return result.data;
+      }
+    }
+  },
 
 })
 export default store;
