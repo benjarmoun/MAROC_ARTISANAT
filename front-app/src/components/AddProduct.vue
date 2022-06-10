@@ -30,14 +30,14 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="john.doe@company.com" required>
                         <option disabled selected value="">Select a category</option>
-                        <option value="1">Category 1</option>
-                        <option value="2">Category 2</option>
-                        <option value="3">Category 3</option>
-                        <option value="4">Category 4</option>
-                        <option value="5">Category 5</option>
-                        <option value="6">Category 6</option>
-                        <option value="7">Category 7</option>
-                        <option value="8">Category 8</option>
+                        <option value="1">Carpets</option>
+                        <option value="2">Pottery</option>
+                        <option value="3">Copperware</option>
+                        <option value="4">Leather</option>
+                        <option value="5">Lamps</option>
+                        <option value="6">Basketry</option>
+                        <option value="7">Ceramics and Pottery</option>
+                        <!-- <option value="8">Category 8</option> -->
 
                     </select>
                 </div>
