@@ -35,6 +35,8 @@ $pages = ['addProduct','getproducts','updateProduct','getProductBySeller','getPr
                         $prod->getProductBySeller($parts[1]);
                     }elseif ($page == 'updateProduct') {
                         $prod->updateProduct($parts[1]);
+                    }elseif ($page == 'deleteProduct') {
+                        $prod->deleteProduct($parts[1]);
 
                     }else{
                         $prod->$page();

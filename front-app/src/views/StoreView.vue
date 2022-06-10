@@ -76,16 +76,11 @@ export default {
                 this.user = JSON.parse( localStorage.getItem("user"));
                 this.user_id = this.user.user_id;
                 console.log(this.user_id);
-            }
+            },
     },
     mounted() {
-        // this.getUserId();
         this.getProdBySeller();
     },
-    // beforemounted() {
-    //   // getProdBySeller();
-    //   console.log("hello");
-    // },
     
 }
 

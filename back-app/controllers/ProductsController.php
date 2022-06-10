@@ -135,8 +135,6 @@ class ProductsController{
 
         // Get raw posted data
         $data = json_decode(file_get_contents("php://input"));
-        var_dump($data);
-        // exit;
 
         if($data) {
             // $product->id = $data->id;
@@ -161,7 +159,7 @@ class ProductsController{
     }
 
     // delete product
-    public function deleteProduct(){
+    public function deleteProduct($id){
         // Instantiate DB & connect
         $database = new Database();
         $db = $database->connect();
@@ -169,12 +167,7 @@ class ProductsController{
         // Instantiate product object
         $product = new Products($db);
 
-        // Get raw posted data
-        $data = json_decode(file_get_contents("php://input"));
-
-        if($data) {
-            $product->id = $data->id;
-        }
+        $product->id = $id;
 
         // Delete product
         if($product->deleteProduct()) {

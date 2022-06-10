@@ -30,9 +30,7 @@
         <router-link :to='"/updateproduct/"+ this.id'>
           <a  class="text-indigo-600 hover:text-indigo-900 mx-1">Edit</a>
         </router-link>
-        <router-link :to='"/deleteproduct/"+ this.id'>
-          <a  class="text-red-600 hover:text-red-900 mx-1">Delete</a>
-        </router-link>
+        <button @click="this.delete(this.id)" class="text-red-600  hover:text-red-900 mx-1">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -42,6 +40,7 @@
 import store from '../store';
 // import store from "../store/index"
 import { mapActions } from 'vuex';
+import axios from 'axios';
 
 export default {
   name: 'Store',
@@ -60,28 +59,14 @@ export default {
             seller_id: '',
         }
     },
-    mounted() {
-      console.log(this.id);
+    methods: {
+      async delete(id) {
+        console.log(id);
+        let result = await axios.delete('http://localhost/MAROC_ARTISANAT/back-app/deleteProduct/'+id);
+        this.$parent.getProdBySeller();
+        console.log(result);
+      }
     },
-    // methods:{
-    //     ...mapActions([
-    //         'getProductBySeller'
-    //         ]),
-    //         getProdBySeller(){
-    //             // this.seller_id ,
-    //             this.getProductBySeller();
-    //             this.products = store.state.s_products;
-    //             console.log(this.products);
-    //             // return this.s_products;
-    //         }
-    // },
-    // mounted() {
-    //     this.getProdBySeller();
-    // },
-    // beforemounted() {
-    //   // getProdBySeller();
-    //   console.log("hello");
-    // },
-    
+
 }
 </script>
