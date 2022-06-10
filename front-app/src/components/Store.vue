@@ -54,9 +54,8 @@ export default {
     },
     data() {
         return {
-            // s_products: [],
-            products: [],
-            seller_id: '',
+            // products: [],
+            // seller_id: '',
         }
     },
     methods: {

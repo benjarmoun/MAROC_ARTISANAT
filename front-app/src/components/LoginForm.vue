@@ -120,10 +120,7 @@
 						console.log("error");
 					}else{
 						console.log(result);
-						//json encode result data
 						localStorage.setItem('user', JSON.stringify(result.data));
-						// localStorage.setItem("user", result.data);
-						// this.$router.push({ name: 'home' });
 					}
 				})
 				

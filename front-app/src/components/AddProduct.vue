@@ -92,47 +92,9 @@ export default {
             price: '',
             category: '',
             picture: '',
-            // data: {
-            //     title: '',
-            //     description: '',
-            //     price: '',
-            //     category: '',
-            //     picture: ''
-            // }
         }
     },
     methods: {
-
-        // async  addProduct() {
-        //     var myHeaders = new Headers();
-        //     myHeaders.append("Content-Type", "application/json");
-        //     myHeaders.append("Cookie", "PHPSESSID=3g9jd4qq8p2vu4lanl28ben59s");
-
-        //     var raw = JSON.stringify({
-        //         "seller_id": "1",
-        //         "category_id": this.category,
-        //         "name": this.title,
-        //         "price": this.price,
-        //         "description": this.description,
-        //         "picture": this.picture.name
-        //     });
-        //     // console.log(raw);
-
-        //     var requestOptions = {
-        //         method: 'POST',
-        //         headers: myHeaders,
-        //         body: raw,
-        //         redirect: 'follow'
-        //     };
-        //     // console.log(requestOptions);
-            
-        //         console.log(raw);
-        //         await fetch("http://localhost/MAROC_ARTISANAT/back-app/addProduct", requestOptions)
-        //             .then(response => response.json())
-        //             .then(result => console.log(result))
-        //             .catch(error => console.log('error', error));
-            
-        // },
 
         async addProduct(ev){
             ev.preventDefault();
@@ -156,7 +118,6 @@ export default {
     },
     mounted() {
         this.seller_id = JSON.parse(localStorage.getItem('user')).user_id;
-        // console.log(this.seller_id);
     },
 
 }

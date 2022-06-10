@@ -157,17 +157,9 @@ import store from '../store'
 export default {
     data() {
         return {
-            // pic: store.state.product.pic,
-            // pic: "basket-panier-berbere-noir-1.jpg",
             Tprice: 0,
             cart: [],
-            cartItems: 0,
-            cartItem: {
-                product: {},
-                quantity: 0,
-                price: 0,
-                total: 0
-            }
+
         }
     },
     props: {
@@ -201,57 +193,13 @@ export default {
       }
     },
     mounted() {
-        // console.log(store.state);
         this.cart = [];
         this.cart = JSON.parse(localStorage.getItem('allProducts'));
         //get product from local storage
         // this.cart = JSON.parse(localStorage.getItem('cart')) || [];
         //calculate total
         this.calculateTotal();
-
-
-        // (this.cart, function(item) {
-        //     this.Tprice += item.price;
-        // });
-
-        // console.log(this.cart);
     },
 
 }
-// let checkout = document.getElementById("checkout");
-// let checdiv = document.getElementById("chec-div");
-// let flag3 = false;
-// const checkoutHandler = () => {
-//   if (!flag3) {
-//     checkout.classList.add("translate-x-full");
-//     checkout.classList.remove("translate-x-0");
-//     setTimeout(function () {
-//       checdiv.classList.add("hidden");
-//     }, 1000);
-//     flag3 = true;
-//   } else {
-//     setTimeout(function () {
-//       checkout.classList.remove("translate-x-full");
-//       checkout.classList.add("translate-x-0");
-//     }, 1000);
-//     checdiv.classList.remove("hidden");
-//     flag3 = false;
-//   }
-// };
 </script>
-<!-- <style>
-    /* width */
-    #scroll::-webkit-scrollbar {
-      width: 1px;
-    }
-
-    /* Track */
-    #scroll::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-
-    /* Handle */
-    #scroll::-webkit-scrollbar-thumb {
-      background: rgb(133, 132, 132);
-    }
-</style> -->

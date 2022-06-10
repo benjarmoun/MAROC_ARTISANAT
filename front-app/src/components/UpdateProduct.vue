@@ -93,13 +93,6 @@ export default {
             category: '',
             picture: '',
             id: '',
-            // data: {
-            //     title: '',
-            //     description: '',
-            //     price: '',
-            //     category: '',
-            //     picture: ''
-            // }
         }
     },
     methods: {

@@ -60,30 +60,20 @@
     props: {
         title: {
             type: String,
-            // required: true
         },
         price: {
             type: Number,
-            // required: true
         },
         description: {
             type: String,
-            // required: true
         },
         pic: {
             type: String,
-            // required: true
         },
     },
     data() {
       return {
       }
-    },
-    methods: {
-      // details(id){
-      //   console.log(id);
-      // },
-        
     },
 }
 </script>

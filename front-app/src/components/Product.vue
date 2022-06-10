@@ -25,8 +25,6 @@ export default {
     },
     data() {
         return {
-            piiic: "basket-chapeau-5.jpg",
-           picture: "gerab.jpg",
         }
     },
     mounted() {

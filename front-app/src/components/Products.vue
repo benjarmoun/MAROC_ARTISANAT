@@ -63,17 +63,7 @@ export default {
     },
     mounted() {
         console.log(store.state.products);
-        // if(store.state.choice == '1'){
-        //     this.getAllProducts().then(result => {
-    
-        //         this.products = store.state.products;
-        //         console.log(this.products);
-        //         // return store.state.products;
-    
-        //     })
-        //     // console.log(this.getAllProducts());
-        // }
-        // else if(store.state.choice == '0'){
+        
 
             store.state.category_id = this.$route.params.category,
             this.getProductByCategory(store.state.category_id).then(result => {
