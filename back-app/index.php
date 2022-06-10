@@ -33,6 +33,8 @@ $pages = ['addProduct','getproducts','updateProduct','getProductBySeller','getPr
                         $prod->getProductByCategoryName($parts[1]);
                     }elseif ($page == 'getProductBySeller') {
                         $prod->getProductBySeller($parts[1]);
+                    }elseif ($page == 'updateProduct') {
+                        $prod->updateProduct($parts[1]);
 
                     }else{
                         $prod->$page();

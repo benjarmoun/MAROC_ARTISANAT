@@ -123,7 +123,7 @@ class ProductsController{
     }
 
     // update product
-    public function updateProduct(){
+    public function updateProduct($id){
         // Instantiate DB & connect
         $database = new Database();
         $db = $database->connect();
@@ -131,11 +131,15 @@ class ProductsController{
         // Instantiate product object
         $product = new Products($db);
 
+        $product->id = $id;
+
         // Get raw posted data
         $data = json_decode(file_get_contents("php://input"));
+        var_dump($data);
+        // exit;
 
         if($data) {
-            $product->id = $data->id;
+            // $product->id = $data->id;
             $product->seller_id = $data->seller_id;
             $product->category_id = $data->category_id;
             $product->name = $data->name;

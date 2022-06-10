@@ -189,12 +189,12 @@ class Products
         // Execute query
         if($stmt->execute()) {
             return true;
+        }else{
+            // Print error if something goes wrong
+            printf("Error: %s", $stmt->error);
+            
+            return false;
         }
-
-        // Print error if something goes wrong
-        printf("Error: %s", $stmt->error);
-        
-        return false;
     }
 
     //delete product

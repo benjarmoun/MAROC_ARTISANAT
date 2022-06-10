@@ -27,9 +27,12 @@
       </td>
       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ price }}</td>
       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-        <a href="#" class="text-indigo-600 hover:text-indigo-900"
-          >Edit</a
-        >
+        <router-link :to='"/updateproduct/"+ this.id'>
+          <a  class="text-indigo-600 hover:text-indigo-900 mx-1">Edit</a>
+        </router-link>
+        <router-link :to='"/deleteproduct/"+ this.id'>
+          <a  class="text-red-600 hover:text-red-900 mx-1">Delete</a>
+        </router-link>
       </td>
     </tr>
   </tbody>
@@ -48,6 +51,7 @@ export default {
         name: String,
         description: String,
         category_id: Number,
+        id: Number
     },
     data() {
         return {
@@ -55,6 +59,9 @@ export default {
             products: [],
             seller_id: '',
         }
+    },
+    mounted() {
+      console.log(this.id);
     },
     // methods:{
     //     ...mapActions([

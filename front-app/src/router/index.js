@@ -43,11 +43,6 @@ const router = createRouter({
       component: () => import('../views/StoreView.vue')
     },
     {
-      path: '/store',
-      name: 'store',
-      component: () => import('../components/store.vue')
-    },
-    {
       path: '/ProductDetails/:id',
       name: 'ProductDetails',
       component: () => import('../views/ProductDetailsView.vue')
@@ -56,6 +51,11 @@ const router = createRouter({
       path: '/AddProduct',
       name: 'AddProduct',
       component: () => import('../views/AddProductView.vue')
+    },
+    {
+      path: '/UpdateProduct/:id',
+      name: 'UpdateProduct',
+      component: () => import('../views/UpdateProductView.vue')
     },
     {
       path: '/Cart',
