@@ -62,6 +62,12 @@ const router = createRouter({
       name: 'Cart',
       component: () => import('../views/CartView.vue')
     },
+    //admin
+    {
+      path: '/AdminLogin',
+      name: 'AdminLogin',
+      component: () => import('../views/Admin/Login.vue')
+    },
     {
       path: '/logout',
       name: 'logout',
