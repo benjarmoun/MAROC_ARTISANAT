@@ -54,6 +54,56 @@ class UserController
         }
     }
 
+    //get all sellers and products number
+    public function getSellers()
+    {
+        // Instantiate DB & connect
+        $database = new Database();
+        $db = $database->connect();
+
+        // Instantiate user object
+        $user = new User($db);
+
+        // Get users
+        $result = $user->getSeller();
+
+        // Get row count
+        $num = $result->rowCount();
+
+        // Check if any users
+        if ($num > 0) {
+            // Cat array
+            $user_arr = array();
+            $user_arr['data'] = array();
+
+            // Loop through results
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                // Extract row
+                extract($row);
+
+                $user_item = array(
+                    'user_id' => $user_id,
+                    'fname' => $fname,
+                    'lname' => $lname,
+                    'email' => $email,
+                    'somme' => $Somme,
+                    // 'seller' => $seller
+                );
+
+                // Push to "data"
+                array_push($user_arr['data'], $user_item);
+            }
+
+            // Turn to JSON & output
+            echo json_encode($user_arr);
+        } else {
+            // No users
+            echo json_encode(
+                array('message' => 'No users Found')
+            );
+        }
+    }
+
     //register user
     public function registerUser()
     {
@@ -92,7 +142,7 @@ class UserController
     }
 
     //delete user by user_id
-    public function deleteUser()
+    public function deleteUser($id)
     {
         // Instantiate DB & connect
         $database = new Database();
@@ -102,12 +152,12 @@ class UserController
         $user = new User($db);
 
         // Get data
-        $data = json_decode(file_get_contents('php://input'));
+        // $data = json_decode(file_get_contents('php://input'));
 
         // Set data
-        if ($data) {
-            $user->user_id = $data->user_id;
-        }
+        // if ($data) {
+            $user->user_id = $id;
+        // }
         // echo $data;
 
         // Delete user

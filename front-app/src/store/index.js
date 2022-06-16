@@ -10,12 +10,12 @@ const store = createStore({
     s_products: [],
     choice: "1",
     category_id: "",
+    isLoggedIn: "",
+    sellers: [],
 
 
 
   },
-  getters: {},
-
   mutations: {
     setProducts(state, products) {
       state.products = products;
@@ -35,10 +35,28 @@ const store = createStore({
       // state.choice = "0";
       state.products = products;
       // console.log(state.products);
+    },
+    setLogged(state, log) {
+
+      state.isLoggedIn = log;
+    },
+    setsellers(state, seller) {
+      state.sellers = seller;
+      // console.log(state.sellers);
     }
 
   },
   actions: {
+    IsLogged({ commit }){
+      let log = localStorage.getItem("user") == null ? false : true;
+      commit("setLogged", log);
+    
+      //     return false;
+      // }else{
+      //     return true;
+      // }
+    },
+
     async getAllProducts({ commit }) {
       let result = await axios.get(
         "http://localhost/MAROC_ARTISANAT/back-app/getproducts",
@@ -46,6 +64,15 @@ const store = createStore({
       );
       commit("setProducts", result.data);
       return result.data;
+    },
+
+    async getsellers({ commit }) {
+      let result = await axios.get(
+        'http://localhost/MAROC_ARTISANAT/back-app/getSellers',
+
+      );
+      commit("setsellers", result.data);
+      return result.data.data;
     },
 
     async getProductByCategory({ commit }, id) {

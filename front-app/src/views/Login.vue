@@ -5,7 +5,13 @@ export default {
     name: 'Login',
     components: {
     LoginForm,
-}
+},
+    methods: {
+        // test2(){
+        //     this$parent.test();
+        // },
+        
+    },
 };	
 
 </script>

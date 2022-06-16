@@ -14,7 +14,7 @@ $user = new UserController();
 $cat = new CategoryController();
 
 
-$pages = ['addProduct','getproducts','updateProduct','getProductBySeller','getProductByCategoryName','deleteProduct','getProductByCategory','getCategories','addCategory','deleteCategory','auth','registerUser','deleteUser','getSingleUser','getUsers','login','updateUser','getProductID'];
+$pages = ['addProduct','getproducts','updateProduct','getSellers','getProductBySeller','getProductByCategoryName','deleteProduct','getProductByCategory','getCategories','addCategory','deleteCategory','auth','registerUser','deleteUser','getSingleUser','getUsers','login','updateUser','getProductID'];
 // print_r($parts) ;
 // if(isset($_SESSION['log']) && $_SESSION['log'] === true){
     if(isset($_GET['page'])){
@@ -37,6 +37,8 @@ $pages = ['addProduct','getproducts','updateProduct','getProductBySeller','getPr
                         $prod->updateProduct($parts[1]);
                     }elseif ($page == 'deleteProduct') {
                         $prod->deleteProduct($parts[1]);
+                    }elseif ($page == 'deleteUser') {
+                        $user->deleteUser($parts[1]);
 
                     }else{
                         $prod->$page();
@@ -44,7 +46,11 @@ $pages = ['addProduct','getproducts','updateProduct','getProductBySeller','getPr
                     // $home->index($page,$prod);
                 }else{
                     if(method_exists($user, $page)){
-                        $home->index($page,$user);
+                        if ($page == 'deleteUser') {
+                            $user->deleteUser($parts[1]);
+                        }else{
+                            $home->index($page,$user);
+                        }
                     }
                     elseif(method_exists($cat, $page)){
                         $home->index($page,$cat);

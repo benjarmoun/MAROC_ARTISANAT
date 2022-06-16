@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "@headlessui/vue": "^1.6.4",
+    "@vue-hero-icons/outline": "^1.7.2",
+    "@vue-hero-icons/solid": "^1.7.2",
     "axios": "^0.27.2",
     "vuex": "^4.0.2"
   }

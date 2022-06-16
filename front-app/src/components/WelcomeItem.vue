@@ -71,11 +71,17 @@
             <h1 class="mx-6 mt-1 text-xl text-5xl font-black text-center text-white lg:text-6xl sm:text-center sm:mx-0">Start Creating <br class="block lg:hidden">Your Next Idea!</h1>
             <p class="w-2/3 my-6 text-xl font-normal text-center text-gray-200">YOUR GUIDE TO CREATING A COSY AUTUMN HOME IN 5 EASY STEPS</p>
             <div class="flex justify-center md:mt-10">
-                <a href="#" class="px-8 py-2 m-2 text-center text-white bg-blue-700 border-2 border-blue-700 hover:bg-transparent rounded">Get Started</a>
-                <a href="#" class="px-8 py-2 m-2 text-center text-white border-2 border-blue-700 hover:bg-blue-700 rounded">Learn More</a>
+                <router-link to="/shop" >
+                    <a href="#" class="px-8 py-2 m-2 text-center text-white bg-blue-700 border-2 border-blue-700 hover:bg-transparent rounded">Get Started</a>
+                </router-link>
+                <!-- <a href="#" class="px-8 py-2 m-2 text-center text-white border-2 border-blue-700 hover:bg-blue-700 rounded">Learn More</a> -->
             </div>
         </div>
 
     </div>
 </section>
 </template>
+
+<script>
+    import { RouterLink } from 'vue-router'
+</script>

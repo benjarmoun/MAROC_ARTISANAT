@@ -1,7 +1,7 @@
     <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
 
-  <tbody class="divide-y divide-gray-200 bg-white">
+  <!-- <tbody class="divide-y divide-gray-200 bg-white"> -->
     <tr>
       <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
         <!-- <div class="flex items-center"> -->
@@ -33,7 +33,7 @@
         <button @click="this.delete(this.id)" class="text-red-600  hover:text-red-900 mx-1">Delete</button>
       </td>
     </tr>
-  </tbody>
+  <!-- </tbody> -->
 </template>
 
 <script>
@@ -56,6 +56,17 @@ export default {
         return {
             // products: [],
             // seller_id: '',
+            // categName: '',
+            // categs: [
+            //   {
+            //     id: 7,
+            //     name: 'Electronics'
+            //   },
+            //   {
+            //     id: 2,
+            //     name: 'Clothes'
+            //   }
+            // ],
         }
     },
     methods: {
@@ -65,6 +76,10 @@ export default {
         this.$parent.getProdBySeller();
         console.log(result);
       }
+    },
+    mounted() {
+        console.log(this.categs);
+        // this.categName = this.categs.find(categ => categ.id == this.category_id ? categ.name : 'no catge');
     },
 
 }

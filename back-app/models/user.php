@@ -19,7 +19,7 @@
           $this->conn = $db;
       }
 
-        // Get users
+        // Get all users
         public function read()
         {
             // Create query
@@ -54,6 +54,22 @@
             return $stmt;
         }
 
+        // Get sellers with products number
+        public function getSeller()
+        {
+            // Create query
+            $query = 'SELECT u.*,COUNT(p.id) Somme FROM user u 
+                                left JOIN product p on u.user_id=p.seller_id GROUP BY u.user_id';
+                                
+
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+
+            // Execute query
+            $stmt->execute();
+            
+            return $stmt;
+        }
 
         
         //remove user
