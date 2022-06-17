@@ -12,10 +12,8 @@ const store = createStore({
     category_id: "",
     isLoggedIn: "",
     sellers: [],
-
-
-
   },
+
   mutations: {
     setProducts(state, products) {
       state.products = products;
@@ -43,6 +41,9 @@ const store = createStore({
     setsellers(state, seller) {
       state.sellers = seller;
       // console.log(state.sellers);
+    },
+    setProductsAdmn(state, products) {
+      state.products = products;
     }
 
   },
@@ -92,6 +93,16 @@ const store = createStore({
       );
       commit("setProductBySeller", result.data);
       // console.log(result.data);
+      return result.data;
+    },
+
+    async getProductsAdmin({ commit }) {
+      let result = await axios.get(
+        'http://localhost/MAROC_ARTISANAT/back-app/getProductsAdmn',
+
+      );
+      commit("setProductsAdmn", result.data);
+      console.log(result.data);
       return result.data;
     },
 
