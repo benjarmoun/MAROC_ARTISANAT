@@ -78,7 +78,7 @@ export default {
       }
     },
     mounted() {
-        console.log(this.categs);
+        // console.log(this.categs);
         // this.categName = this.categs.find(categ => categ.id == this.category_id ? categ.name : 'no catge');
     },
 
