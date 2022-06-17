@@ -144,7 +144,7 @@
               <div class="flex flex-col mt-8">
                 <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                   <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                    <table v-if="display" class="min-w-full">
+                    <table v-if="!display" class="min-w-full">
                       <thead>
                         <tr>
                           <th
@@ -243,7 +243,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    <table class="min-w-full divide-y divide-gray-300 ">
+                    <table v-if="display" class="min-w-full divide-y divide-gray-300 ">
                       <thead class="bg-gray-50">
                           <tr>
                               <th scope="col"
@@ -253,7 +253,7 @@
                                   class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
                                   Name</th>
                               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                  Description</th>
+                                  Seller</th>
                               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                   Category</th>
                               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -265,11 +265,12 @@
                       </thead>
                       <tbody class="divide-y divide-gray-200 bg-white" v-for="product in products">
                           <Store :id="product.id" :name="product.name" :price="product.price"
-                              :picture="product.picture" :description="product.description"
-                              :category_id="categs.find(categ => categ.id == product.category_id).name ? categs.find(categ => categ.id == product.category_id).name : 'No category'" />
+                              :picture="product.picture" :fname="product.fname" :lname="product.lname"
+                              :category="product.c_name"   />
                       </tbody>
                         
                     </table>
+                    
                     <SotreClone v-if="display"  />
 
                   </div>
@@ -290,7 +291,7 @@ import { mapActions } from 'vuex';
 import axios from 'axios';
 import DashCard from '../../components/DashCards.vue';
 import SotreClone from './StoreClone.vue';
-import Store from './../../components/Store.vue';
+import Store from './../../components/ProdsAdmin.vue';
 import { parse } from '@babel/parser';
 
 
@@ -306,36 +307,7 @@ export default {
       display: false,
       sellers: [],
       products: [],
-      categs: [
-                {
-                    id: 2,
-                    name: 'Pottery'
-                },
-                {
-                    id: 7,
-                    name: 'Basketry'
-                },
-                // {
-                //     id: 3,
-                //     name: 'Books'
-                // },
-                {
-                    id: 4,
-                    name: 'Copperware'
-                },
-                {
-                    id: 5,
-                    name: 'Leather'
-                },
-                {
-                    id: 6,
-                    name: 'Lamps'
-                },
-                {
-                    id: 1,
-                    name: 'Carepts'
-                }
-            ],
+      
       navigation : [
         { name: 'Dashboard', href: '/ADMIN', current: true },
         { name: 'Team', href: '/ADMIN/products', current: false },
@@ -347,11 +319,24 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'getsellers',
+      'getAllProducts',
+      'getProductBySeller',
+      'getProductsAdmin',
+    ]),
     getProdBySeller() {
       this.user = JSON.parse(localStorage.getItem("user"));
       this.user_id = this.user.user_id;
       this.getProductBySeller(this.user_id).then(response => {
           this.products = store.state.s_products;
+          console.log(this.products);
+      })
+    },
+
+    getProdsAdmin() {
+      this.getProductsAdmin().then(response => {
+          this.products = store.state.products;
           console.log(this.products);
       })
     },
@@ -373,10 +358,7 @@ export default {
     getsellersFct(){
       this.getsellers().then((response) => {
       this.sellers= response;
-      console.log(this.sellers.length);
-
-
-    
+      // console.log(this.sellers.length);
     });
       
       // this.sellers = JSON.stringify(store.state.sellers);
@@ -389,25 +371,19 @@ export default {
     getproductsFct(){
       this.getAllProducts().then((response) => {
       this.products= response;
-      console.log(this.products.length);
+      // console.log(this.products.length);
       console.log(store.state.products);
       });
     },
 
-    ...mapActions([
-      'getsellers',
-      'getAllProducts',
-      'getProductBySeller',
-    ]),
     
   },
   mounted() {
     this.getsellersFct()
     this.getproductsFct()
-    this.getProdBySeller();
-    // this.getAllProducts();
-    // console.log(store.state.products);
-    // console.log(this.sellers);
+    // this.getProdBySeller();
+    this.getProdsAdmin();
+
   },
 
 }
