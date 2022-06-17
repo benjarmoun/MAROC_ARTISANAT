@@ -72,6 +72,25 @@ class Products
         return $result?$result:false;
     }
 
+    // Get products
+    public function getProductsAdmin()
+    {
+        // Create query
+        $query = 'SELECT p.*,u.fname,u.lname,c.name as c_name from product p 
+                        LEFT JOIN user u ON u.user_id=p.seller_id 
+                        LEFT JOIN category c on p.category_id=c.category_id';
+
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Execute query
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result?$result:false;
+    }
+
     // Get products of one seller
     public function read_seller() 
     {
