@@ -28,6 +28,27 @@ class ProductsController{
         }
     }
 
+    public function getProductsAdmn(){
+
+        // Instantiate DB & connect
+        $database = new Database();
+        $db = $database->connect();
+
+        // Instantiate product object
+        $product = new Products($db);
+
+        // product read query
+        $result = $product->getProductsAdmin();
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No products Found')
+            );
+        }
+    }
+
     // //get single product
     // public function getProductID(){
 
