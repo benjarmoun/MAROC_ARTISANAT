@@ -7,28 +7,28 @@
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
                     <input v-model="title" type="text" id="title"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="john.doe@company.com" required>
+                        placeholder="Title" required>
                 </div>
                 <div class="mb-6">
                     <label for="description"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Description</label>
                     <input v-model="description" type="text" id="description"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="john.doe@company.com" required>
+                        placeholder="Description" required>
                 </div>
                 <div class="mb-6">
                     <label for="price"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price</label>
                     <input v-model="price" type="text" id="price"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="john.doe@company.com" required>
+                        placeholder="Price" required>
                 </div>
                 <div class="mb-6">
                     <label for="category"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Category</label>
                     <select v-model="category" name="category" id="category"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="john.doe@company.com" required>
+                         required>
                         <option disabled selected value="">Select a category</option>
                         <option value="1">Carpets</option>
                         <option value="2">Pottery</option>

@@ -96,7 +96,7 @@ const store = createStore({
       return result.data;
     },
 
-    async getProductsAdmin({ commit }) {
+    async getProdctsAdmin({ commit }) {
       let result = await axios.get(
         'http://localhost/MAROC_ARTISANAT/back-app/getProductsAdmn',
 

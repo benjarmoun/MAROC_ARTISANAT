@@ -49,7 +49,7 @@ export default {
         price:  Number,
         name: String,
         description: String,
-        category_id: Number,
+        category_id: String,
         id: Number
     },
     data() {

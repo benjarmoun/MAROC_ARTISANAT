@@ -12,6 +12,7 @@
       public $password;
       public $email;
       public $seller;
+      public $username;
 
       // Constructor with DB
       public function __construct($db)
@@ -183,6 +184,18 @@
             $query = 'SELECT * FROM ' . $this->table . ' WHERE email = :email';
             $stm=$this->conn->prepare($query);
             $stm->bindParam(':email', $this->email);
+            if($stm->execute())
+            {
+                return $stm->fetch(PDO::FETCH_OBJ);
+            }
+            return false;
+        }
+
+        public function loginAdmin()
+        {
+            $query = 'SELECT * FROM admin WHERE username = :username';
+            $stm=$this->conn->prepare($query);
+            $stm->bindParam(':username', $this->username);
             if($stm->execute())
             {
                 return $stm->fetch(PDO::FETCH_OBJ);

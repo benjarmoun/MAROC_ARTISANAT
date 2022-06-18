@@ -294,4 +294,40 @@ class UserController
             );
         }
     }
+
+    public function loginAdmin()
+    {
+        // Instantiate DB & connect
+        $database = new Database();
+        $db = $database->connect();
+
+        // Instantiate user object
+        $user = new User($db);
+
+        // Get data
+        $data = json_decode(file_get_contents('php://input'));
+        // print_r($data);
+
+        $user->username=$data->user;
+        // print_r($user->username);
+
+        $res=$user->loginAdmin();
+        if($res){
+            if ($res->username === $data->user && password_verify($data->password, $res->password)) {
+                echo json_encode(
+                    array(
+                        'message' => 'success',
+                        'data' => $user->loginAdmin())
+                );
+            }else{
+                echo json_encode(
+                    array('message' => 'Wrong password')
+                );
+            }
+        }else{
+            echo json_encode(
+                array('message' => 'Username not found')
+            );
+        }
+    }
 }

@@ -74,7 +74,6 @@ const router = createRouter({
           component: () => import('../views/CartView.vue')
         },
       ]
-      // component: () => import('../components/Header.vue'),
     },
     //admin
     {

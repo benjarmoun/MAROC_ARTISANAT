@@ -59,7 +59,7 @@
                     <!-- <Products /> -->
 
                     <div class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        <product @click="details(product.id) " v-for="product in products" :price="product.price" :title="product.name" :pic="product.picture"/>
+                        <product @click="details(product.id)" v-for="product in products" :price="product.price" :title="product.name" :pic="product.picture"/>
                         
                             <!-- <Product price="12.34" title="LAMPE DITIA" Pic="src\assets\lamps\lampe-dite-ditia-.jpg"/>
                             <Product price="75.34" title="LAMPE GOUTTE D’EAU" Pic="src\assets\lamps\lampe-marocaine-goutte-deau3-300x300.jpg"/>

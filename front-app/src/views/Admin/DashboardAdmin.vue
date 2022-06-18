@@ -79,13 +79,27 @@
               <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
               {{ item.name }}
             </a> -->
-            <router-link v-for="item in navigation" :to="item.href" :key="item.name" :class="[item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']" >
+            <router-link v-for="item in navigation" :to="item.href" @click="disp(item.val)" :key="item.name" :class="[item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']" >
               <!-- <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']"> -->
                 <component :is="item.icon" :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 flex-shrink-0 h-6 w-6']" aria-hidden="true" />
                 {{ item.name }}
               <!-- </a> -->
             </router-link>
+
           </nav>
+        </div>
+        <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
+          <a href="#" class="flex-shrink-0 w-full group block">
+            <div class="flex items-center">
+              <div>
+                <img class="inline-block h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
+                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -133,9 +147,17 @@
           </div> -->
           <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
             <div>
-              <button @click="getsellersFct()" >
+              <button @click="getsellersFct()">
                 <h3 class="text-3xl font-medium text-gray-700">ADMIN's Dashboard</h3>
               </button>
+              <button  @click="logout()" class="box-border inline-flex items-center h-10 px-4 text-base text-center text-indigo-900 no-underline align-middle bg-transparent rounded cursor-pointer select-none hover:bg-gray-50 hover:text-blue-700 focus:shadow-xs focus:no-underline">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="bevel">
+                    <path d="M10 3H6a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h4M16 17l5-5-5-5M19.8 12H9" />
+                </svg>
+              </button>
+                <!-- </router-link> -->
               <!-- card template main 3 -->
               <DashCard :stat1="this.sellers.length" :stat2='"hhhh"' :stat3="this.products.length" />
 
@@ -143,137 +165,145 @@
 
               <div class="flex flex-col mt-8">
                 <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                  <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                    <table v-if="!display" class="min-w-full">
-                      <thead>
-                        <tr>
-                          <th
-                            class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                          >
-                            #ID
-                          </th>
-                          <th
-                            class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                          >
-                            Name
-                          </th>
-                          <th
-                            class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                          >
-                            E-Mail
-                          </th>
-                          <th
-                            class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                          >
-                            Products
-                          </th>
-                          <th
-                            class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
-                          >
-                            Action
-                          </th>
-                          <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th> -->
-                        </tr>
-                      </thead>
-
-                      <tbody class="bg-white">
-                        <tr v-for="seller in this.sellers"  >
-
-                          <!-- table row -->
-                        <!-- <tr > -->
-                          <td
-                            class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
-                          >
-                            <!-- <div class="flex items-center"> -->
-                              <div class="flex-shrink-0 w-10 h-10">
-                                {{ seller.user_id}}
-                                <!-- <img
-                                  class="w-10 h-10 rounded-full"
-                                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                  alt=""
-                                /> -->
-                              </div>
-
-                                <!-- <div class="ml-4">
-                                  <div class="text-sm font-medium leading-5 text-gray-900">
-                                    {{ seller.name }} seller.fname
-                                  </div>
-                                  <div class="text-sm leading-5 text-gray-500">
-                                    {{ u.email }} u.email
-                                  </div>
-                                </div> -->
-                            <!-- </div> -->
-                          </td>
-
-                          <td
-                            class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
-                          >
-                            <div class="text-sm leading-5 text-gray-900">
-                              {{ seller.fname}} 
-                            </div>
-                            <div class="text-sm leading-5 text-gray-500">
-                              {{ seller.lname }} 
-                            </div>
-                          </td>
-
-                          <td
-                            class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
-                          >
-                            <span
-                              class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full"
-                              >
-                              {{ seller.email }}
-                              </span
-                            >
-                          </td>
-
-                          <td
-                            class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap"
-                          >
-                            {{ seller.somme }}
-                          </td>
-
-                          <td
-                            class="px-6 py-4 text-sm font-medium leading-5  border-b border-gray-200 whitespace-nowrap"
-                          >
-                            <button @click="this.delete(seller.user_id)" class="text-red-500 hover:text-red-700">
-                                Delete
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table v-if="display" class="min-w-full divide-y divide-gray-300 ">
-                      <thead class="bg-gray-50">
+                    <div v-if="display == 1">
+                    <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
+                      <table class="min-w-full">
+                        <thead>
                           <tr>
-                              <th scope="col"
-                                  class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                  Picture</th>
-                              <th scope="col"
-                                  class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                  Name</th>
-                              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                  Seller</th>
-                              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                  Category</th>
-                              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                  price</th>
-                              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                  <span>Actions</span>
-                              </th>
+                            <th
+                              class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                            >
+                              #ID
+                            </th>
+                            <th
+                              class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                            >
+                              Name
+                            </th>
+                            <th
+                              class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                            >
+                              E-Mail
+                            </th>
+                            <th
+                              class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                            >
+                              Products
+                            </th>
+                            <th
+                              class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                            >
+                              Action
+                            </th>
+                            <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th> -->
                           </tr>
-                      </thead>
-                      <tbody class="divide-y divide-gray-200 bg-white" v-for="product in products">
-                          <Store :id="product.id" :name="product.name" :price="product.price"
-                              :picture="product.picture" :fname="product.fname" :lname="product.lname"
-                              :category="product.c_name"   />
-                      </tbody>
-                        
-                    </table>
-                    
-                    <SotreClone v-if="display"  />
+                        </thead>
+  
+                        <tbody class="bg-white">
+                          <tr v-for="seller in this.sellers"  >
+  
+                            <!-- table row -->
+                          <!-- <tr > -->
+                            <td
+                              class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
+                            >
+                              <!-- <div class="flex items-center"> -->
+                                <div class="flex-shrink-0 w-10 h-10">
+                                  {{ seller.user_id}}
+                                  <!-- <img
+                                    class="w-10 h-10 rounded-full"
+                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                    alt=""
+                                  /> -->
+                                </div>
+  
+                                  <!-- <div class="ml-4">
+                                    <div class="text-sm font-medium leading-5 text-gray-900">
+                                      {{ seller.name }} seller.fname
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500">
+                                      {{ u.email }} u.email
+                                    </div>
+                                  </div> -->
+                              <!-- </div> -->
+                            </td>
+  
+                            <td
+                              class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
+                            >
+                              <div class="text-sm leading-5 text-gray-900">
+                                {{ seller.fname}} 
+                              </div>
+                              <div class="text-sm leading-5 text-gray-500">
+                                {{ seller.lname }} 
+                              </div>
+                            </td>
+  
+                            <td
+                              class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
+                            >
+                              <span
+                                class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full"
+                                >
+                                {{ seller.email }}
+                                </span
+                              >
+                            </td>
+  
+                            <td
+                              class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap"
+                            >
+                              {{ seller.somme }}
+                            </td>
+  
+                            <td
+                              class="px-6 py-4 text-sm font-medium leading-5  border-b border-gray-200 whitespace-nowrap"
+                            >
+                              <button @click="this.delete(seller.user_id)" class="text-red-500 hover:text-red-700">
+                                  Delete
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
+                    <div v-if="display == 2">
+                      <h3 class="text-2xl font-medium text-gray-800 my-2">PRODUCTS TABLE</h3>
+                      <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-300 ">
+                          <!-- <caption>Product</caption> -->
+                          <thead class="bg-gray-50">
+                              <tr>
+                                  <th scope="col"
+                                      class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                      Picture</th>
+                                  <th scope="col"
+                                      class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                      Name</th>
+                                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                      Seller</th>
+                                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                      Category</th>
+                                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                      price</th>
+                                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                      <span>Actions</span>
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody class="divide-y divide-gray-200 bg-white" v-for="product in prods">
+                              <!-- {{ product }} -->
+                              <Store :id="product.id" :name="product.name" :price="product.price"
+                                  :picture="product.picture" :fname="product.fname" :lname="product.lname"
+                                  :category="product.c_name" />
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
 
-                  </div>
+                    <!-- <SotreClone v-if="display == 3"  /> -->
+
                 </div>
               </div>
             </div>
@@ -290,7 +320,7 @@ import store from '../../store';
 import { mapActions } from 'vuex';
 import axios from 'axios';
 import DashCard from '../../components/DashCards.vue';
-import SotreClone from './StoreClone.vue';
+// import SotreClone from './StoreClone.vue';
 import Store from './../../components/ProdsAdmin.vue';
 import { parse } from '@babel/parser';
 
@@ -299,18 +329,19 @@ export default {
   name: 'Dashboard',
   components:{
     DashCard,
-    SotreClone,
+    // SotreClone,
     Store,
   },
   data() {
     return {
-      display: false,
+      display: 1,
       sellers: [],
       products: [],
+      prods: [],
       
       navigation : [
-        { name: 'Dashboard', href: '/ADMIN', current: true },
-        { name: 'Team', href: '/ADMIN/products', current: false },
+        { name: 'Dashboard', href: '/ADMIN', val:1, current: true },
+        { name: 'Team', href: '/ADMIN/products', val:2, current: false },
         { name: 'Projects', href: '/#', current: false },
         { name: 'Calendar', href: '#', current: false },
         { name: 'Documents', href: '#', current: false },
@@ -323,8 +354,15 @@ export default {
       'getsellers',
       'getAllProducts',
       'getProductBySeller',
-      'getProductsAdmin',
+      'getProdctsAdmin',
     ]),
+    logout() {
+      localStorage.removeItem("admin");
+      this.$router.push('/AdminLogin');
+      },
+    disp(val) {
+      this.display = val;
+    },
     getProdBySeller() {
       this.user = JSON.parse(localStorage.getItem("user"));
       this.user_id = this.user.user_id;
@@ -335,9 +373,9 @@ export default {
     },
 
     getProdsAdmin() {
-      this.getProductsAdmin().then(response => {
-          this.products = store.state.products;
-          console.log(this.products);
+      this.getProdctsAdmin().then(response => {
+          this.prods = store.state.products;
+          console.log(this.prods);
       })
     },
 
