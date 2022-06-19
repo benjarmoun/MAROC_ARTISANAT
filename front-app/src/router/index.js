@@ -82,7 +82,7 @@ const router = createRouter({
       component: () => import('../views/Admin/Login.vue')
     },
     {
-      path: '/ADMIN',
+      path: '/ADMIN/users',
       name: 'ADMIN',
       component: () => import('../views/Admin/DashboardAdmin.vue')
     },
