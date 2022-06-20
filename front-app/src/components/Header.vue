@@ -27,10 +27,10 @@
                             class="box-border inline-block text-center text-indigo-900 no-underline bg-transparent cursor-pointer hover:text-blue-700 focus:no-underline">
                             My Store
                         </router-link>
-                        <router-link to="/about"
+                        <!-- <router-link to="/about"
                             class="box-border inline-block text-center text-indigo-900 no-underline bg-transparent cursor-pointer hover:text-blue-700 focus:no-underline">
                             About
-                        </router-link>
+                        </router-link> -->
                     </div>
                     <div
                         class="relative px-4 mt-2 font-medium  leading-10 md:flex-grow-0 md:flex-shrink-0 md:mt-0 md:text-right lg:flex-grow-0 lg:flex-shrink-0">

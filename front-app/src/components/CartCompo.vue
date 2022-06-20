@@ -1,54 +1,31 @@
 <template>
     <!-- component -->
     <div class="flex items-center justify-center py-2 mx-8">
-        <!--  
-  <button @click ="checkoutHandler(false)" class="py-2 px-10 rounded bg-indigo-600 hover:bg-indigo-700 text-white">Open Modal</button>
-</div>
-<div class="w-full h-full bg-black dark:bg-gray-900 bg-opacity-90 top-0 overflow-y-auto overflow-x-hidden fixed sticky-0" id="chec-div">
-  -->
+       
         <div class="w-full  z-10 right-0 h-full  transform translate-x-0 transition ease-in-out duration-700"
             id="checkout">
             <div class="flex  lg:flex-row flex-col" id="cart">
                 <div class=" w-full lg:px-8 lg:py-1 md:px-6 px-4 md:py-0 py-4 bg-white dark:bg-gray-800 overflow-y-hidden overflow-x-hidden "
                     id="scroll">
-                    <!-- <div class="flex items-center text-gray-500 hover:text-gray-600 dark:text-white cursor-pointer" onclick="checkoutHandler(false)">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <polyline points="15 6 9 12 15 18" />
-          </svg>
-          <p class="text-sm pl-2 leading-none dark:hover:text-gray-200">Back</p>
-        </div> -->
                     <p class="lg:text-4xl text-3xl font-black leading-10 text-gray-800 dark:text-white py-3">Bag</p>
+                    <div v-if="this.cart.length == 0" class="py-3 px-5 m-5 bg-red-100 text-red-900 text-sm rounded-md border border-red-200" role="alert">
+                        Your cart is <strong>EMPTY</strong>! SHOP NOW!
+                    </div>
                     <!-- cart compo -->
-                    <div v-for="product in this.cart" class="md:flex items-strech py-8 md:py-10 lg:py-0 border-t border-gray-50">
-                        <div class="md:w-3/12 2xl:w-1/4 w-full">
-                            <!-- <img src="./../assets/basket-panier-berbere-noir-1.jpg"
-                                class="h-full object-center object-cover md:block hidden"  /> -->
-                                <!-- <h1>{{this.pic}}</h1> -->
+                    <div  v-for="product in this.cart" class="md:flex items-strech my-5 py-8 md:py-10 lg:py-0 border-t border-gray-50">
+                        <div class="md:w-3/12 2xl:w-1/4 w-32  h-32 ">
                                 
                             <img :src='"src/assets/"+product.picture'
-                                class="h-full object-center object-cover md:block hidden"  />
-                            <!-- <img src="https://i.ibb.co/g9xsdCM/Rectangle-37.pngg" alt="Black Leather Bag"
-                                class="md:hidden w-full h-full object-center object-cover" /> -->
+                                class="h-full object-center object-cover m-auto md:block hidden"  />
                         </div>
                         <div class="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-                            <!-- <p class="text-xs leading-3 text-gray-800 dark:text-white md:pt-0 pt-4">RF293</p> -->
                             <div class="flex items-center justify-between w-full pt-1">
                                 <p class="text-base font-black leading-none text-gray-800 dark:text-white">{{product.name}}</p>
-                                <!-- <select aria-label="Select quantity"
-                                    class="py-2 px-1 border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
-                                    <option>01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select> -->
                             </div>
                             <p class="text-xs leading-3 text-gray-600 dark:text-white pt-2">{{product.description}} </p>
-                            <!-- <p class="text-xs leading-3 text-gray-600 dark:text-white py-4">Color: Black</p> -->
                             <p class="w-96 text-xs mt-3 leading-3 text-gray-600 dark:text-white">Category: {{product.category}}</p>
                             <div class="flex items-center justify-between pt-5">
                                 <div class="flex itemms-center">
-                                    <!-- <p class="text-xs leading-3 underline text-gray-800 dark:text-white cursor-pointer">
-                                        Add to favorites</p> -->
                                     <a href="#" @click="removeFromCart(product)" class="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</a>
                                     
                                 </div>
@@ -58,60 +35,6 @@
                     </div>
 
                    
-        <!-- <div class="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
-          <div class="md:w-4/12 2xl:w-1/4 w-full">
-            <img src="https://i.ibb.co/c6KyDXN/Rectangle-5-1.png" alt="Gray Sneakers" class="h-full object-center object-cover md:block hidden" />
-            <img src="https://i.ibb.co/yVSpYqx/Rectangle-6.png" alt="Gray Sneakers" class="md:hidden w-full h-full object-center object-cover" />
-          </div>
-          <div class="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-            <p class="text-xs leading-3 text-gray-800 dark:text-white md:pt-0 pt-4">RF293</p>
-            <div class="flex items-center justify-between w-full pt-1">
-              <p class="text-base font-black leading-none text-gray-800 dark:text-white">LW sneakers</p>
-              <select aria-label="Select quantity" class="py-2 px-1 border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
-            </div>
-            <p class="text-xs leading-3 text-gray-600 dark:text-white pt-2">Height: 10 inches</p>
-            <p class="text-xs leading-3 text-gray-600 dark:text-white py-4">Color: Black</p>
-            <p class="w-96 text-xs leading-3 text-gray-600 dark:text-white">Composition: 100% calf leather</p>
-            <div class="flex items-center justify-between pt-5">
-              <div class="flex itemms-center">
-                <p class="text-xs leading-3 underline text-gray-800 dark:text-white cursor-pointer">Add to favorites</p>
-                <p class="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
-              </div>
-              <p class="text-base font-black leading-none text-gray-800 dark:text-white">,000</p>
-            </div>
-          </div>
-        </div> -->
-                    <!-- <div class="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
-          <div class="md:w-4/12 2xl:w-1/4 w-full">
-            <img src="https://i.ibb.co/6gzWwSq/Rectangle-20-1.png" alt="Black Leather Purse" class="h-full object-center object-cover md:block hidden" />
-            <img src="https://i.ibb.co/TTnzMTf/Rectangle-21.png" alt="Black Leather Purse" class="md:hidden w-full h-full object-center object-cover" />
-          </div>
-          <div class="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-            <p class="text-xs leading-3 text-gray-800 dark:text-white md:pt-0 pt-4">RF293</p>
-            <div class="flex items-center justify-between w-full">
-              <p class="text-base font-black leading-none text-gray-800 dark:text-white">Luxe card holder</p>
-              <select aria-label="Select quantity" class="py-2 px-1 border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
-            </div>
-            <p class="text-xs leading-3 text-gray-600 dark:text-white pt-2">Height: 10 inches</p>
-            <p class="text-xs leading-3 text-gray-600 dark:text-white py-4">Color: Black</p>
-            <p class="w-96 text-xs leading-3 text-gray-600 dark:text-white">Composition: 100% calf leather</p>
-            <div class="flex items-center justify-between pt-5">
-              <div class="flex itemms-center">
-                <p class="text-xs leading-3 underline text-gray-800 dark:text-white cursor-pointer">Add to favorites</p>
-                <p class="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
-              </div>
-              <p class="text-base font-black leading-none text-gray-800 dark:text-white">,000</p>
-            </div>
-          </div>
-        </div> -->
                 </div>
 
                 <!-- SUMMARY -->
@@ -121,17 +44,14 @@
                             <p class="lg:text-4xl text-3xl font-black leading-9 text-gray-800 dark:text-white">Summary
                             </p>
                             <!-- SUMMARY PRODUCT NAME AND PRICE -->
-                            <div v-for="product in this.cart" class="flex items-center justify-between pt-10">
-                                <!-- <p class="text-base leading-none text-gray-800 dark:text-white">Subtotal</p> -->
-                                <p class="text-base leading-none text-gray-800 dark:text-white">- {{product.name}}</p>
-                                <p class="text-base leading-none text-gray-800 dark:text-white">${{product.price}}</p>
+                            <div v-if="this.cart.length != 0" v-for="product in this.cart" class="flex items-center justify-between pt-10">
+                              <p class="text-base leading-none text-gray-800 dark:text-white">- {{product.name}}</p>
+                              <p class="text-base leading-none text-gray-800 dark:text-white">${{product.price}}</p>
                             </div>
                             <div class="flex items-center justify-between pt-5">
-                                <!-- <p class="text-base leading-none text-gray-800 dark:text-white">Shipping</p> -->
                                 <p class="text-base leading-none text-gray-800 dark:text-white"></p>
                             </div>
                             <div class="flex items-center justify-between pt-5">
-                                <!-- <p class="text-base leading-none text-gray-800 dark:text-white">Tax</p> -->
                                 <p class="text-base leading-none text-gray-800 dark:text-white"></p>
                             </div>
                         </div>
@@ -142,7 +62,15 @@
                                     {{Tprice}}</p>
                             </div>
                             <button onclick="checkoutHandler1(true)"
-                                class="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700">Checkout</button>
+                                class="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700">
+                                Checkout
+                              </button>
+                              <!-- <button @click="insertOrder" >
+                                botona <br>
+                              </button>
+                              <button class="m-3" @click="clearCart" >
+                                botona clearCart
+                              </button> -->
                         </div>
                     </div>
                 </div>
@@ -159,11 +87,8 @@ export default {
         return {
             Tprice: 0,
             cart: [],
-
+          
         }
-    },
-    props: {
-
     },
 
     methods: {
@@ -179,17 +104,58 @@ export default {
         localStorage.setItem("allProducts", JSON.stringify(existingProducts));
         
         this.cart = JSON.parse(localStorage.getItem('allProducts'));
-        this.total 
         this.calculateTotal();
 
         
         }
       },
+      async email(){
+            // ev.preventDefault();
+            var user = JSON.parse(localStorage.getItem("user"));
+            let result = await axios.post(
+                'http://localhost/MAROC_ARTISANAT/back-app/sendEmail',
+                {
+                    user_id: this.seller_id,
+                    category_id: this.category,
+                    name: this.title,
+                    price: this.price,
+                    description: this.description,
+                    picture: this.picture.name
+                }
+            );
+            console.log(result);
+            if(result.data.success){
+                alert('Error');
+                }else{
+                alert('Product added successfully');
+                this.$router.push('/mystore');
+            }
+        },
+      clearCart(){
+        // localStorage.removeItem('allProducts');
+
+        this.cart = [];
+        localStorage.setItem("allProducts", JSON.stringify(this.cart));
+        this.calculateTotal();
+        console.log(JSON.parse(localStorage.getItem('allProducts')));
+
+      },
       calculateTotal() {
           this.Tprice = 0;
+          if(JSON.parse(localStorage.getItem('allProducts')).length != 0){
           this.cart.forEach(item => {
               this.Tprice += item.price;
           });
+          }
+      },
+      insertOrder() {
+        let order = [];
+        if(JSON.parse(localStorage.getItem('allProducts')).length != 0){
+          this.cart.forEach(item => {
+            order.push({item: item.id, sold: item.sold++});
+          });
+          console.log(order);
+        }
       }
     },
     mounted() {

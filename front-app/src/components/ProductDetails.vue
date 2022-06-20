@@ -12,7 +12,7 @@
           </div>
           <div class="md:flex-1 px-4">
             <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">{{ product.name }}</h2>
-            <p class="text-gray-500 text-sm">By <a href="#" class="text-indigo-600 hover:underline">STORE NAME</a></p>
+            <p class="text-gray-500 text-sm">By <a href="#" class="text-indigo-600 hover:underline">ibrahim benjarmoun</a></p>
 
             <div class="flex items-center space-x-4 my-4">
               <div>
@@ -99,7 +99,7 @@ export default {
         'http://localhost/MAROC_ARTISANAT/back-app/getProductID/'+data.id
       );
       this.product = result.data[0];
-      // console.log(this.product);
+      console.log(this.product);
     },
    
     addToCart() {

@@ -8,11 +8,11 @@
     <div class="font-mono my-9">
 		<!-- Container -->
 		<div class="container mx-auto ">
-			<div class="flex justify-center items-center ">
+			<div class="sm:flex  justify-center items-center ">
 				<!-- Row -->
 				
                 <!-- Col -->
-                <div class="w-auto h-auto  ">
+                <div class="flex justify-center w-auto h-auto p-3 m-auto">
                     <slot name="img"></slot>
                 </div>
                 <!-- Col -->

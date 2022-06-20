@@ -24,7 +24,7 @@ class Products
     public function getProductByID() {
         // Create Query
         $query = 'SELECT
-                    id, seller_id, category_id, name, price, description, picture
+                    id, seller_id, category_id, name,sold, price, description, picture
                 FROM
                     ' . $this->table . '
                 WHERE
@@ -90,6 +90,23 @@ class Products
 
         return $result?$result:false;
     }
+
+        // Get products
+        public function getOredrSum()
+        {
+            // Create query
+            $query = 'SELECT SUM(product.sold) AS somme FROM product';
+    
+    
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+    
+            // Execute query
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $result?$result:false;
+        }
 
     // Get products of one seller
     public function read_seller() 

@@ -5,7 +5,46 @@
   header('Access-Control-Allow-Methods: POST, DELETE, PUT');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
+  require __DIR__.'/../PHPMailer/PHPMailer.php';
+  require __DIR__.'/../PHPMailer/SMTP.php';
+  require __DIR__.'/../PHPMailer/Exception.php';
+  use PHPMailer\PHPMailer\PHPMailer;
+
 class ProductsController{
+
+    public function sendEmail() {
+
+        $data = json_decode(file_get_contents("php://input"));
+        print_r(
+            $data
+        );
+
+        $mail = new PHPMailer(true); 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
+        
+        $body="MAROC ARTISAN
+            Hello $data->fname $data->lname ,
+            Your purxhase has been completed. Your reservation is confirmed with the following info :
+            Personal ID : $data->user_id
+            Name: $data->fname $data->lname .
+            Email: $data->email.";
+            
+            $mail->isSMTP();
+            $mail->Host = "smtp.gmail.com";
+            $mail->SMTPAuth= "true";
+            $mail->SMTPSecure = "tls";
+            $mail->port="587";
+            $mail->Username = "samirnouami@gmail.com";
+            $mail->Password = "dmrhetulyvluwltw";
+            // $mail->Subject = "test test allah allah";
+            $mail->setFrom("samirnouami@gmail.com");
+            $mail->Body = "$body";
+            $mail->addAddress("benjarmoun123@gmail.com");//sent To
+            $mail->Send() ;
+            $mail->smtpClose();
+        }
+    }
 
     public function getProducts(){
 
@@ -45,6 +84,27 @@ class ProductsController{
         } else {
             echo json_encode(
                 array('message' => 'No products Found')
+            );
+        }
+    }
+
+    public function getOrdersSum(){
+
+        // Instantiate DB & connect
+        $database = new Database();
+        $db = $database->connect();
+
+        // Instantiate product object
+        $order = new Products($db);
+
+        // product read query
+        $result = $order->getOredrSum();
+
+        if ($result) {
+            echo json_encode($result);
+        } else {
+            echo json_encode(
+                array('message' => 'No orders Found')
             );
         }
     }

@@ -51,11 +51,6 @@ const store = createStore({
     IsLogged({ commit }){
       let log = localStorage.getItem("user") == null ? false : true;
       commit("setLogged", log);
-    
-      //     return false;
-      // }else{
-      //     return true;
-      // }
     },
 
     async getAllProducts({ commit }) {
@@ -74,6 +69,15 @@ const store = createStore({
       );
       commit("setsellers", result.data);
       return result.data.data;
+    },
+
+    async getOrdersSum({ commit }) {
+      let result = await axios.get(
+        'http://localhost/MAROC_ARTISANAT/back-app/getOrdersSum',
+
+      );
+      // commit("setorders", result.data);
+      return result.data[0].somme;
     },
 
     async getProductByCategory({ commit }, id) {
