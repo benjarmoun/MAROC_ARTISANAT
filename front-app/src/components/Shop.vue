@@ -45,8 +45,14 @@
 
                     <!-- <Products /> -->
 
-                    <div class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <div v-if="products.length > 0" class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         <product @click="details(product.id)" v-for="product in products" :price="product.price" :title="product.name" :pic="product.picture"/>
+                    </div>
+                    <div v-else>
+                          <div class="p-4 mb-4 m-5 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                                 No Products found.
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -94,18 +100,7 @@
                         break;
                 }
             },
-            // getByCat(id) {
-            //     // store.commit ="0";
-            //     this.getProductByCategory(id).then(result => {
-            //         this.products = store.state.products;  
-            //     })
-            // },
-            // carpet() {
-            //     // store.commit ="0";
-            //     this.getProductByCategory(1).then(result => {
-            //         this.products = store.state.products;  
-            //     })
-            // },
+            
             test(name){
                 this.getProductByCategoryName(name).then(result => {
                     this.products = store.state.products;  

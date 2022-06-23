@@ -54,19 +54,7 @@ export default {
     },
     data() {
         return {
-            // products: [],
-            // seller_id: '',
-            // categName: '',
-            // categs: [
-            //   {
-            //     id: 7,
-            //     name: 'Electronics'
-            //   },
-            //   {
-            //     id: 2,
-            //     name: 'Clothes'
-            //   }
-            // ],
+            
         }
     },
     methods: {
@@ -78,8 +66,6 @@ export default {
       }
     },
     mounted() {
-        // console.log(this.categs);
-        // this.categName = this.categs.find(categ => categ.id == this.category_id ? categ.name : 'no catge');
     },
 
 }

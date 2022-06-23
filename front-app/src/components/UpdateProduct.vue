@@ -117,6 +117,16 @@ export default {
             console.log(result);
         },
 
+        async getprod(ev){
+            ev.preventDefault();
+            this.id = this.$route.params.id;
+            console.log(this.id);
+            let result = await axios.put(
+                "http://localhost/MAROC_ARTISANAT/back-app/getProductID//" + this.id
+            );
+            console.log(result);
+        },
+
         getpic(e) { 
             this.picture = e.target.files[0];
         }

@@ -107,6 +107,8 @@ class UserController
     //register user
     public function registerUser()
     {
+        if($_SERVER['REQUEST_METHOD'] != 'POST') return;
+
         // Instantiate DB & connect
         $database = new Database();
         $db = $database->connect();
@@ -125,8 +127,6 @@ class UserController
             $user->password = password_hash($data->password, PASSWORD_DEFAULT);
             $user->seller = $data->seller;
         }
-        // echo $data;
-
         // Create user
         if ($user->create()) {
             // User created
@@ -151,14 +151,8 @@ class UserController
         // Instantiate user object
         $user = new User($db);
 
-        // Get data
-        // $data = json_decode(file_get_contents('php://input'));
-
-        // Set data
-        // if ($data) {
+        // send id to delete
             $user->user_id = $id;
-        // }
-        // echo $data;
 
         // Delete user
         if ($user->remove()) {

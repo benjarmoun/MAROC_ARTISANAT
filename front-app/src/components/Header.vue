@@ -23,14 +23,10 @@
                             class="box-border inline-block text-center text-indigo-900 no-underline bg-transparent cursor-pointer hover:text-blue-700 focus:no-underline">
                             Shop
                         </router-link>
-                        <router-link to="/mystore"
+                        <router-link v-if="isLoggedIn" to="/mystore"
                             class="box-border inline-block text-center text-indigo-900 no-underline bg-transparent cursor-pointer hover:text-blue-700 focus:no-underline">
                             My Store
                         </router-link>
-                        <!-- <router-link to="/about"
-                            class="box-border inline-block text-center text-indigo-900 no-underline bg-transparent cursor-pointer hover:text-blue-700 focus:no-underline">
-                            About
-                        </router-link> -->
                     </div>
                     <div
                         class="relative px-4 mt-2 font-medium  leading-10 md:flex-grow-0 md:flex-shrink-0 md:mt-0 md:text-right lg:flex-grow-0 lg:flex-shrink-0">
@@ -42,6 +38,7 @@
                             class="box-border inline-flex items-center h-10 px-4 text-base text-center text-indigo-900 no-underline align-middle bg-transparent border border-gray-300 rounded cursor-pointer select-none hover:bg-gray-50 hover:text-blue-700 focus:shadow-xs focus:no-underline">
                             Sign Up
                         </router-link>
+                        <span>{{this.username}}</span>
                         <router-link v-if="isLoggedIn" to="/login" @click="logout()"
                             class="box-border inline-flex items-center h-10 px-4 text-base text-center text-indigo-900 no-underline align-middle bg-transparent rounded cursor-pointer select-none hover:bg-gray-50 hover:text-blue-700 focus:shadow-xs focus:no-underline">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -85,36 +82,28 @@
         data() {
             return {
                 isLoggedIn: "",
+                username: "",
             }
         },
         methods: {
-            ...mapActions([
-                // 'IsLogged',
-            ]),
             fUpdate() {
                 this.$forceUpdate();
             },
             logout() {
                 localStorage.removeItem("user");
-                // this.$router.push({
-                //     name: 'Login'
-                // })
                 this.IsLogged();
                 this.$forceUpdate();
             },
             IsLogged(){
                 this.isLoggedIn = localStorage.getItem("user") == null ? false : true;
-                // console.log(this.isLoggedIn);
+                this.username = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).fname : ""  ;
                 this.$forceUpdate();
-            }
+            },
         },
 
         mounted() {
-
             this.IsLogged();
             this.$forceUpdate();
-
-
         }
     }
 

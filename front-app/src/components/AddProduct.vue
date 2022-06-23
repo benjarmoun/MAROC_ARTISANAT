@@ -37,17 +37,9 @@
                         <option value="5">Lamps</option>
                         <option value="6">Basketry</option>
                         <option value="7">Ceramics and Pottery</option>
-                        <!-- <option value="8">Category 8</option> -->
 
                     </select>
                 </div>
-                <!-- <div class="mb-6">
-                    <label for="picture"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Picture</label>
-                    <input v-bind="picture" type="file" @change="getpic" name="picture"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="john.doe@company.com" required />
-                </div> -->
 
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700"> Picture </label>

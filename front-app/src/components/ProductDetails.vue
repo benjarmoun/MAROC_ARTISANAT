@@ -4,8 +4,11 @@
   <body class="antialiased">
 
     <div class="py-6">
-
+      
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6" >
+        <div v-if="alertdisplay" class="p-4 mx-10 text-center mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+          <span class="font-medium">Success!</span> Product added to your cart successfully.
+        </div>
         <div class="flex flex-col md:flex-row -mx-4">
           <div class="md:flex-1 px-4">
             <img :src='"../src/assets/" + product.picture' class="h-64 md:h-80 rounded-lg bg-gray-100 m-auto" alt="">
@@ -53,6 +56,7 @@ export default {
     return {
       id: this.$route.params.id,
       product: [],
+      alertdisplay: false,
       // product : {
       //   id: 1,
       //   title: 'LAMPE DITIA',
@@ -66,28 +70,6 @@ export default {
     // id: Number
   },
   methods: {
-    //   var axios = require('axios');
-    //   var data = JSON.stringify({
-    //     "id": "2"
-    //   });
-
-    //   var config = {
-    //     method: 'get',
-    //     url: 'http://localhost/MAROC_ARTISANAT/back-app/getProductID',
-    //     headers: { 
-    //       'Content-Type': 'application/json', 
-    //       'Cookie': 'PHPSESSID=3g9jd4qq8p2vu4lanl28ben59s'
-    //     },
-    //     data : data
-    //   };
-
-    //   axios(config)
-    //   .then(function (response) {
-    //     console.log(JSON.stringify(response.data));
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
 
     async getProductID() {
       var data = {
@@ -121,6 +103,7 @@ export default {
         existingProducts.push(this.product);
 
         localStorage.setItem("allProducts", JSON.stringify(existingProducts));
+        this.alertdisplay = true;
 
         // this.$router.push('/cart/');
       }else{

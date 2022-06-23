@@ -61,14 +61,14 @@
                                 <p class="text-2xl font-bold leading-normal text-right text-gray-800 dark:text-white">
                                     {{Tprice}}</p>
                             </div>
-                            <button onclick="checkoutHandler1(true)"
+                            <button @click="clearCart"
                                 class="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700">
                                 Checkout
                               </button>
-                              <!-- <button @click="insertOrder" >
+                              <button @click="email" >
                                 botona <br>
                               </button>
-                              <button class="m-3" @click="clearCart" >
+                              <!-- <button class="m-3" @click="clearCart" >
                                 botona clearCart
                               </button> -->
                         </div>
@@ -82,6 +82,7 @@
 <script>
 // import createStore from '@\stores\counter.js'
 import store from '../store'
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -110,30 +111,36 @@ export default {
         }
       },
       async email(){
-            // ev.preventDefault();
             var user = JSON.parse(localStorage.getItem("user"));
+            var products = JSON.parse(localStorage.getItem("allProducts"));
+            if(products.length == 0){
+                alert("Your cart is empty");
+                return;
+            }
+            console.log(user);
+            console.log(products.length);
             let result = await axios.post(
                 'http://localhost/MAROC_ARTISANAT/back-app/sendEmail',
                 {
-                    user_id: this.seller_id,
-                    category_id: this.category,
-                    name: this.title,
-                    price: this.price,
-                    description: this.description,
-                    picture: this.picture.name
+                    products_number: products.length,
+                    tot_price: this.Tprice,
+                    fname: user.fname,
+                    lname: user.lname,
+                    email: user.email,
+                    // description: this.description,
+                    // picture: this.picture.name
                 }
             );
             console.log(result);
             if(result.data.success){
                 alert('Error');
                 }else{
-                alert('Product added successfully');
-                this.$router.push('/mystore');
+                alert('Order confirmed');
+                // this.$router.push('/mystore');
+                this.clearCart();
             }
         },
       clearCart(){
-        // localStorage.removeItem('allProducts');
-
         this.cart = [];
         localStorage.setItem("allProducts", JSON.stringify(this.cart));
         this.calculateTotal();

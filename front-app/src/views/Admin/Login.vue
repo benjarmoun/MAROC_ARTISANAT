@@ -151,6 +151,13 @@ export default {
 
     },
   },
+  mounted() {
+        // console.log(JSON.parse(localStorage.getItem('admin')));
+        if(JSON.parse(localStorage.getItem('admin'))){
+          this.$router.push({name:"ADMIN"});
+        }
+    
+  },
 
 
 };

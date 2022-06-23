@@ -25,8 +25,8 @@ class ProductsController{
         
         $body="MAROC ARTISAN
             Hello $data->fname $data->lname ,
-            Your purxhase has been completed. Your reservation is confirmed with the following info :
-            Personal ID : $data->user_id
+            Your purchase has been completed. Your reservation is confirmed with the following info :
+            your order of $data->products_number products for a total of $data->tot_price$ has been confirmed.
             Name: $data->fname $data->lname .
             Email: $data->email.";
             
@@ -108,35 +108,6 @@ class ProductsController{
             );
         }
     }
-
-    // //get single product
-    // public function getProductID(){
-
-    //     // Instantiate DB & connect
-    //     $database = new Database();
-    //     $db = $database->connect();
-
-    //     // Instantiate product object
-    //     $product = new Products($db);
-
-    //     // Get raw posted data
-    //     $data = json_decode(file_get_contents("php://input"));
-
-    //     if($data){
-    //         $product->id = $data->id;
-    //     }
-
-    //     // product read query
-    //     $result = $product->getProductByID();
-
-    //     if ($result) {
-    //         echo json_encode($result);
-    //     } else {
-    //         echo json_encode(
-    //             array('message' => 'No product Found')
-    //         );
-    //     }
-    // }
 
     //get single product with params
     public function getProductID($id){

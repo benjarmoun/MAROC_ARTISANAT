@@ -20,9 +20,9 @@
             <router-link  to="/ADMIN/products" @click="disp(2)" :class="[display == 2 ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']" >
                 Products
             </router-link>
-            <router-link  to="/ADMIN/products" @click="disp(3)" :class="[display == 3 ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']" >
+            <!-- <router-link  to="/ADMIN/products" @click="disp(3)" :class="[display == 3 ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md']" >
                 Orders (comming soon)
-            </router-link>
+            </router-link> -->
             
 
           </nav>
@@ -83,7 +83,6 @@
                             >
                               Action
                             </th>
-                            <!-- <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th> -->
                           </tr>
                         </thead>
   
@@ -91,29 +90,12 @@
                           <tr v-for="seller in this.sellers"  >
   
                             <!-- table row -->
-                          <!-- <tr > -->
                             <td
                               class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                             >
-                              <!-- <div class="flex items-center"> -->
                                 <div class="flex-shrink-0 w-10 h-10">
                                   {{ seller.user_id}}
-                                  <!-- <img
-                                    class="w-10 h-10 rounded-full"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt=""
-                                  /> -->
                                 </div>
-  
-                                  <!-- <div class="ml-4">
-                                    <div class="text-sm font-medium leading-5 text-gray-900">
-                                      {{ seller.name }} seller.fname
-                                    </div>
-                                    <div class="text-sm leading-5 text-gray-500">
-                                      {{ u.email }} u.email
-                                    </div>
-                                  </div> -->
-                              <!-- </div> -->
                             </td>
   
                             <td
@@ -190,7 +172,6 @@
                       </div>
                     </div>
 
-                    <!-- <SotreClone v-if="display == 3"  /> -->
 
                 </div>
               </div>
@@ -203,21 +184,18 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+
 import store from '../../store';
 import { mapActions } from 'vuex';
 import axios from 'axios';
 import DashCard from '../../components/DashCards.vue';
-// import SotreClone from './StoreClone.vue';
 import Store from './../../components/ProdsAdmin.vue';
-import { parse } from '@babel/parser';
 
 
 export default {
   name: 'Dashboard',
   components:{
     DashCard,
-    // SotreClone,
     Store,
   },
   data() {
@@ -271,7 +249,6 @@ export default {
     async delete(id) {
         console.log(id);
         let result = await axios.delete('http://localhost/MAROC_ARTISANAT/back-app/deleteUser/'+id);
-        // this.$parent.getProdBySeller();
         console.log(result);
         this.getsellersFct();
       },
@@ -279,15 +256,7 @@ export default {
     getsellersFct(){
       this.getsellers().then((response) => {
       this.sellers= response;
-      // console.log(this.sellers.length);
     });
-      
-      // this.sellers = JSON.stringify(store.state.sellers);
-      // console.log(JSON.parse(this.sellers).data);
-      // this.variable = JSON.parse(this.sellers).data;
-      // this.sellers = JSON.parse(this.sellers).data;
-     
-      // console.log(this.variable);
     },
 
     getOrdersFct(){
@@ -299,7 +268,6 @@ export default {
     getproductsFct(){
       this.getAllProducts().then((response) => {
       this.products= response;
-      // console.log(this.products.length);
       console.log(store.state.products);
       });
     },
@@ -307,9 +275,11 @@ export default {
     
   },
   mounted() {
+    if(!JSON.parse(localStorage.getItem('admin'))){
+          this.$router.push({name:"AdminLogin"});
+        }
     this.getsellersFct()
     this.getproductsFct()
-    // this.getProdBySeller();
     this.getProdsAdmin();
     this.getOrdersFct();
 
@@ -317,60 +287,3 @@ export default {
 
 }
       </script>
-
-<!-- // import {
-//   Dialog,
-//   DialogPanel,
-//   Menu,
-//   MenuButton,
-//   MenuItem,
-//   MenuItems,
-//   TransitionChild,
-//   TransitionRoot,
-// } from '@headlessui/vue'
-// import {
-//   BellIcon,
-//   CalendarIcon,
-//   ChartBarIcon,
-//   FolderIcon,
-//   HomeIcon,
-//   InboxIcon,
-//   MenuAlt2Icon,
-//   UsersIcon,
-//   XIcon,
-// } from '@heroicons/vue/outline'
-// import { SearchIcon } from '@heroicons/vue/solid'
-
-// const navigation = [
-//   { name: 'Dashboard', href: '#', current: true },
-//   { name: 'Team', href: '#', current: false },
-//   { name: 'Projects', href: '#', current: false },
-//   { name: 'Calendar', href: '#', current: false },
-//   { name: 'Documents', href: '#', current: false },
-//   { name: 'Reports', href: '#', current: false },
-// ]
-// const userNavigation = [
-//   { name: 'Your Profile', href: '#' },
-//   { name: 'Settings', href: '#' },
-//   { name: 'Sign out', href: '#' },
-// ]
-
-// interface User {
-//   name: string;
-//   email: string;
-//   title: string;
-//   title2: string;
-//   status: string;
-//   role: string;
-// }
-
-// const User = {
-//   name: "John Doe",
-//   email: "john@example.com",
-//   title: "Software Engineer",
-//   title2: "Web dev",
-//   status: "Active",
-//   role: "Owner",
-// };
-
-// const users = ref<User[]>([...Array(10).keys()].map(() => testUser)); -->

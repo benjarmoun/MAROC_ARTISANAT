@@ -22,16 +22,6 @@
         <div class="text-gray-900  ">{{fname}}</div>
         <div class="text-gray-500">{{lname }}</div>
       </td>
-      <!-- <td
-                            class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
-                          >
-                            <div class="text-sm leading-5 text-gray-900">
-                              {{ seller.fname}} 
-                            </div>
-                            <div class="text-sm leading-5 text-gray-500">
-                              {{ seller.lname }} 
-                            </div>
-                          </td> -->
       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
         <span class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">{{ category }}</span>
       </td>
@@ -63,19 +53,7 @@ export default {
     },
     data() {
         return {
-            // products: [],
-            // seller_id: '',
-            // categName: '',
-            // categs: [
-            //   {
-            //     id: 7,
-            //     name: 'Electronics'
-            //   },
-            //   {
-            //     id: 2,
-            //     name: 'Clothes'
-            //   }
-            // ],
+           
         }
     },
     methods: {
@@ -87,10 +65,5 @@ export default {
         console.log(result);
       }
     },
-    mounted() {
-        // console.log(this.categs);
-        // this.categName = this.categs.find(categ => categ.id == this.category_id ? categ.name : 'no catge');
-    },
-
 }
 </script>
