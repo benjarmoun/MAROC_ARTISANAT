@@ -71,8 +71,8 @@ class Products
 
         return $result?$result:false;
     }
-
-    // Get products
+ 
+    // Get products for the admin join with category and user
     public function getProductsAdmin()
     {
         // Create query
@@ -91,22 +91,21 @@ class Products
         return $result?$result:false;
     }
 
-        // Get products
-        public function getOredrSum()
-        {
-            // Create query
-            $query = 'SELECT SUM(product.sold) AS somme FROM product';
-    
-    
-            // Prepare statement
-            $stmt = $this->conn->prepare($query);
-    
-            // Execute query
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-            return $result?$result:false;
-        }
+    // Get the number of orders
+    public function getOredrSum()
+    {
+        // Create query
+        $query = 'SELECT SUM(product.sold) AS somme FROM product';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Execute query
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result?$result:false;
+    }
 
     // Get products of one seller
     public function read_seller() 

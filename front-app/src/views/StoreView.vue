@@ -14,11 +14,12 @@
                 </router-link>
             </div>
         </div>
-            <!-- <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mx-6">
-                 <div class="py-3 px-5 mb-4 bg-purple-100 text-purple-900 text-sm rounded-md border border-purple-200" role="alert">
-                A simple <strong>info</strong> alert—check it out!
-            </div> -->
-        <div class="mt-8 flex flex-col">
+        <!-- NO PRODUCTS ALERT -->
+        <div v-if="products.length == 0" class="py-3 px-5 mb-4 bg-red-100 text-purple-900 text-sm rounded-md border border-purple-200" role="alert">
+            You havent posted any product for sale. <strong>ADD A PRODUCT NOW!</strong>
+        </div>
+        <!-- PRODUCTS LIST -->
+        <div class="my-10 flex flex-col">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mx-6">
@@ -47,8 +48,6 @@
                                     :picture="product.picture" :description="product.description"
                                     :category_id="categs.find(categ => categ.id == product.category_id).name ? categs.find(categ => categ.id == product.category_id).name : 'No category'" />
                             </tbody>
-                            <!-- <Store v-for="product in products" :id="product.id" :name="product.name" :price="product.price" :picture="product.picture" :description="product.description" 
-                :category_id="this.categs.find(categ => categ == product.category_id ? categ.id: 'no catge')" /> -->
                         </table>
                     </div>
                 </div>
@@ -86,10 +85,6 @@ export default {
                     id: 7,
                     name: 'Basketry'
                 },
-                // {
-                //     id: 3,
-                //     name: 'Books'
-                // },
                 {
                     id: 4,
                     name: 'Copperware'
@@ -113,8 +108,7 @@ export default {
         ...mapActions([
             'getProductBySeller',
         ]),
-        getProdBySeller() {
-            // this.seller_id ,
+        getProdBySeller() { // get all products by seller id
             this.user = JSON.parse(localStorage.getItem("user"));
             this.user_id = this.user.user_id;
             this.getProductBySeller(this.user_id).then(response => {
@@ -123,7 +117,7 @@ export default {
             })
 
         },
-        getUserId() {
+        getUserId() { // get user by id
             this.user = JSON.parse(localStorage.getItem("user"));
             this.user_id = this.user.user_id;
             console.log(this.user_id);
@@ -131,7 +125,6 @@ export default {
     },
     mounted() {
         this.getProdBySeller();
-        this.categName = this.categs.find(categ => categ.id == this.category_id ? categ.name : 'no catge');
     },
 
 }

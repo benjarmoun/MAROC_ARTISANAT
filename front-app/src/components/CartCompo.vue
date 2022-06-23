@@ -61,13 +61,13 @@
                                 <p class="text-2xl font-bold leading-normal text-right text-gray-800 dark:text-white">
                                     {{Tprice}}</p>
                             </div>
-                            <button @click="clearCart"
+                            <button @click="email"
                                 class="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700">
                                 Checkout
                               </button>
-                              <button @click="email" >
+                              <!-- <button @click="email" >
                                 botona <br>
-                              </button>
+                              </button> -->
                               <!-- <button class="m-3" @click="clearCart" >
                                 botona clearCart
                               </button> -->
@@ -80,8 +80,6 @@
 
 </template>
 <script>
-// import createStore from '@\stores\counter.js'
-import store from '../store'
 import axios from 'axios'
 export default {
     data() {
@@ -127,8 +125,6 @@ export default {
                     fname: user.fname,
                     lname: user.lname,
                     email: user.email,
-                    // description: this.description,
-                    // picture: this.picture.name
                 }
             );
             console.log(result);
@@ -136,7 +132,6 @@ export default {
                 alert('Error');
                 }else{
                 alert('Order confirmed');
-                // this.$router.push('/mystore');
                 this.clearCart();
             }
         },
@@ -168,8 +163,6 @@ export default {
     mounted() {
         this.cart = [];
         this.cart = JSON.parse(localStorage.getItem('allProducts'));
-        //get product from local storage
-        // this.cart = JSON.parse(localStorage.getItem('cart')) || [];
         //calculate total
         this.calculateTotal();
     },

@@ -66,7 +66,7 @@ class ProductsController{
             );
         }
     }
-
+    // Get products for the admin joined with category and user
     public function getProductsAdmn(){
 
         // Instantiate DB & connect
@@ -87,7 +87,7 @@ class ProductsController{
             );
         }
     }
-
+    // Get the number of orders
     public function getOrdersSum(){
 
         // Instantiate DB & connect
@@ -109,7 +109,7 @@ class ProductsController{
         }
     }
 
-    //get single product with params
+    //get single product by id 
     public function getProductID($id){
 
         // Instantiate DB & connect
@@ -119,12 +119,7 @@ class ProductsController{
         // Instantiate product object
         $product = new Products($db);
 
-        // Get raw posted data
-        // $data = json_decode(file_get_contents("php://input"));
-
-        // if($data){
-            $product->id = $id;
-        // }
+        $product->id = $id;
 
         // product read query
         $result = $product->getProductByID();
@@ -189,7 +184,6 @@ class ProductsController{
         $data = json_decode(file_get_contents("php://input"));
 
         if($data) {
-            // $product->id = $data->id;
             $product->seller_id = $data->seller_id;
             $product->category_id = $data->category_id;
             $product->name = $data->name;
