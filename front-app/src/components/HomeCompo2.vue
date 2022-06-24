@@ -1,8 +1,3 @@
-<!-- <script>
-    export default {
-        name: 'HomeCompo',
-    };
-</script> -->
 
 <template>
     <div class="font-mono my-9">

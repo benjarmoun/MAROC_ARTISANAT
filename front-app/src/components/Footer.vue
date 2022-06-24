@@ -9,8 +9,6 @@
 
     <p class=" mx-auto mt-6 leading-relaxed text-center text-gray-700">
       The treasures of Moroccan crafts at your fingertips <br> to create a cosy autumn home.
-      <!-- TO CREATING A COSY AUTUMN HOME. <br> -->
-
     </p>
 
    

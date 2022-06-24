@@ -32,21 +32,11 @@
                                 </label>
 								
                                 <input v-model="password" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********"  />
-                                
-								<!-- /*input with error*/ -->
-								<!-- <input v-model="password" class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********"  />
-                                <p class="text-xs italic text-red-500">Please choose a password.</p> -->
-								
 							</div>
 							<div class="mb-6 text-center">
-								<!-- <router-link to="/" > -->
-									<button type="submit"  class="w-full px-6 py-3 text-white bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg">
-										Log In
-									</button>
-								<!-- </router-link> -->
-								<!-- <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="button" @click="login">
-									LOG IN
-								</button> -->
+								<button type="submit"  class="w-full px-6 py-3 text-white bg-blue-500 hover:bg-blue-700 rounded-lg shadow-lg">
+									Log In
+								</button>
 							</div>
 							<hr class="mb-6 border-t" />
 							<div class="text-center">

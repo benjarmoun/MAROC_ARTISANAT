@@ -7,15 +7,11 @@ spl_autoload_register('autoload');
 
 function autoload($class_name){
     $array_paths = array(
-        // 'database/',
         'config/',
         'models/',
         'controllers/',
     );
 
-    // $parts = explode('\\',$class_name);
-    // $name = array_pop($parts);
-    // echo $class_name;
     foreach($array_paths as $path){
         $file = sprintf($path.'%s.php',$class_name);
         if(is_file($file)){

@@ -23,9 +23,6 @@
                     <router-link to="/shop/Basketry" >
                         <a @click="test('Basketry')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline my-4">Basketry</a>
                     </router-link>
-                    <!-- <router-link to="/shop/Lamps" >
-                        <a @click="test('Lamps')" class="block font-medium text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:underline my-4">Lamps</a>
-                    </router-link> -->
                 </div>
 
                 <div class="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
@@ -43,16 +40,15 @@
                         </div>
                     </div>
 
-                    <!-- <Products /> -->
+                    <!-- <Products display /> -->
 
                     <div v-if="products.length > 0" class="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         <product @click="details(product.id)" v-for="product in products" :price="product.price" :title="product.name" :pic="product.picture"/>
                     </div>
                     <div v-else>
-                          <div class="p-4 mb-4 m-5 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-                                 No Products found.
-                            </div>
-
+                        <div class="p-4 mb-4 m-5 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                            No Products found.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,6 +75,13 @@
             Products,
         },
         methods: {
+
+            ...mapActions([
+                'getAllProducts',
+                'getProductByCategory',
+                'getProductByCategoryName'
+            ]),
+
             sortBy(event) {
                 switch(event.target.value) {
                     case '1':
@@ -109,7 +112,6 @@
            
             all() {
                 this.getAllProducts().then(result => {
-    
                 this.products = store.state.products;
             })  
             },
@@ -121,11 +123,6 @@
                     }
                 })
             },
-            ...mapActions([
-                'getAllProducts',
-                'getProductByCategory',
-                'getProductByCategoryName'
-            ]),   
              
         },
 

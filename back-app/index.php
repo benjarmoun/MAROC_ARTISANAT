@@ -26,7 +26,6 @@ $pages = ['addProduct','getproducts','sendEmail','getOrdersSum','getProductsAdmn
                 if(method_exists($prod, $page)){
                     if ($page == 'getProductID') {
                         $prod->getProductID($parts[1]);
-
                     }elseif ($page == 'getProductByCategory') {
                         $prod->getProductByCategory($parts[1]);
                     }elseif ($page == 'getProductByCategoryName') {
@@ -57,21 +56,7 @@ $pages = ['addProduct','getproducts','sendEmail','getOrdersSum','getProductsAdmn
                     }
                 }
             }else{
-                // include('./views/includes/404.php');
                 echo "not found";
             }
         }
-        // else{
-        //     // $home->index();
-        //     $res->readReservation();
-        // }
-        
-    // }else
-    //     if( isset($_GET['page']) && $_GET['page'] === 'register'){ 
-    //         $home->index('register');
-    //     }
-    // else{
-    //     $home->index('login');
-    // }
-
 ?>

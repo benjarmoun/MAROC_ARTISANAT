@@ -4,9 +4,6 @@
     import WelcomeItem from './WelcomeItem.vue'
 </script>
 
-
-
-
 <template>
 
     <WelcomeItem/>
@@ -81,7 +78,6 @@
 
 <style scoped>
 .bg-local {
-    /* background-color: blue; */
     background: url("src\assets\gerab.jpg");
 }
 </style>

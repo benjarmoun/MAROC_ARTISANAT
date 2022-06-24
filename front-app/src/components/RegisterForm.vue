@@ -1,15 +1,11 @@
 <template>
     <div class="font-mono">
-		<!-- Container -->
 		<div class="container mx-auto">
 			<div class="flex justify-center px-6 ">
-				<!-- Row -->
 				<div class="w-full xl:w-3/4 lg:w-11/12 flex justify-center items-center h-screen">
-					<!-- Col -->
 					<div class="w-full h-auto  hidden lg:block lg:w-5/12 bg-cover rounded-l-lg">
                         <img src="..\assets\gerab.jpg" alt="">
                     </div>
-					<!-- Col -->
 					<div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
 						<h3 class="pt-4 text-2xl text-center">Create an Account!</h3>
 						<form @submit="register" class="px-8 pt-6 pb-8 mb-4 bg-white rounded">

@@ -3,7 +3,7 @@
 
     <div class="absolute inset-0 z-0 h-full bg-blue-700 opacity-25"></div>
 
-    <!-- Desktop menu -->
+    <!-- FIRS ITEM OF THE HOME PAGE WITH BACKGROUND IMAGE -->
     <div class="flex items-center w-full h-20">
         <!-- <nav class="hidden w-full md:block" x-show="!showMenu" x-cloak="">
             <ul class="relative z-10 flex items-center px-6 text-sm text-white lg:text-base">
@@ -74,7 +74,6 @@
                 <router-link to="/shop" >
                     <a href="#" class="px-8 py-2 m-2 text-center text-white bg-blue-700 border-2 border-blue-700 hover:bg-transparent rounded">Get Started</a>
                 </router-link>
-                <!-- <a href="#" class="px-8 py-2 m-2 text-center text-white border-2 border-blue-700 hover:bg-blue-700 rounded">Learn More</a> -->
             </div>
         </div>
 

@@ -1,10 +1,7 @@
 <template>
-  <!-- <DetailsCompo :title="this.product[0].name" :price="this.product[0].price" :description="this.product[0].description" :pic="this.product[0].Pic"  /> -->
 
   <body class="antialiased">
-
     <div class="py-6">
-      
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6" >
         <div v-if="alertdisplay" class="p-4 mx-10 text-center mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
           <span class="font-medium">Success!</span> Product added to your cart successfully.
@@ -31,7 +28,6 @@
             </div>
 
             <p class="text-gray-500">{{ product.description }} </p>
-            <!-- <img :src='"src/assets/" + this.pic' alt=""> -->
             <div class="flex py-4 space-x-4">
               <button type="button" @click="addToCart()" class="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
                 Add to Cart
@@ -57,26 +53,14 @@ export default {
       id: this.$route.params.id,
       product: [],
       alertdisplay: false,
-      // product : {
-      //   id: 1,
-      //   title: 'LAMPE DITIA',
-      //   price: 12.34,
-      //   Pic: 'gerab.jpg',
-      //   description : 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos!',
-      // },
     }
-  },
-  props: {
-    // id: Number
   },
   methods: {
 
     async getProductID() {
       var data = {
-        // "id": this.$route.params.id
         "id": this.id
       };
-      // console.log(data.id);
       let result = await axios.get(
         'http://localhost/MAROC_ARTISANAT/back-app/getProductID/'+data.id
       );
@@ -92,20 +76,17 @@ export default {
 
       var existingProduct = test.find(function(product) {
         return product.id == this.id;
-        // console.log(product.id);
       }, this);
 
-      // // if there is no product with the same id, add it to the cart
+      // if there is no product with the same id, add it to the cart
       if(!existingProduct) {
         var existingProducts = JSON.parse(localStorage.getItem("allProducts"));
         if(existingProducts == null) existingProducts = [];
         // Save allProducts back to local storage
         existingProducts.push(this.product);
-
         localStorage.setItem("allProducts", JSON.stringify(existingProducts));
         this.alertdisplay = true;
 
-        // this.$router.push('/cart/');
       }else{
         alert("Product already in cart");
       }

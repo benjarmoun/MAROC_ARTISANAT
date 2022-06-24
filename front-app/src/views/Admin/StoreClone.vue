@@ -91,7 +91,6 @@ export default {
             'getProductBySeller',
         ]),
         getProdBySeller() {
-            // this.seller_id ,
             this.user = JSON.parse(localStorage.getItem("user"));
             this.user_id = this.user.user_id;
             this.getProductBySeller(this.user_id).then(response => {

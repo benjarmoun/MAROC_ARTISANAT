@@ -1,20 +1,15 @@
-    <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-
-  <!-- <tbody class="divide-y divide-gray-200 bg-white"> -->
+<!-- PRODUCTS TABLE FOR THE ADMIN DASHBOARD -->
     <tr>
       <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-        <!-- <div class="flex items-center"> -->
           <div class="h-32 w-32 flex-shrink-0">
             <img class="h-32 w-32 rounded-md" :src='"../src/assets/"+this.picture' alt="" />
           </div>
-          <!-- </div> -->
         </td>
           <td>
             <div>  
           <div class="ml-4">
             <div class="font-medium text-gray-900">{{ name }}</div>
-            <!-- <div class="text-gray-500">{{ product.email }}</div> -->
           </div>
         </div>
       </td>
@@ -34,9 +29,6 @@
 </template>
 
 <script>
-import store from '../store';
-// import store from "../store/index"
-import { mapActions } from 'vuex';
 import axios from 'axios';
 
 export default {

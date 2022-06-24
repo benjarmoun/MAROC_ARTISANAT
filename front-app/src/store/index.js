@@ -17,22 +17,15 @@ const store = createStore({
   mutations: {
     setProducts(state, products) {
       state.products = products;
-      // console.log(state.products);
     },
     setProductByCategory(state, products) {
-      // state.choice = "0";
       state.products = products;
-      // console.log(state.products);
     },
     setProductBySeller(state, x) {
-      // state.choice = "0";
       state.s_products = x;
-      // console.log(state.products);
     },
     setProductByCategoryName(state, products) {
-      // state.choice = "0";
       state.products = products;
-      // console.log(state.products);
     },
     setLogged(state, log) {
 
@@ -40,7 +33,6 @@ const store = createStore({
     },
     setsellers(state, seller) {
       state.sellers = seller;
-      // console.log(state.sellers);
     },
     setProductsAdmn(state, products) {
       state.products = products;
@@ -74,9 +66,7 @@ const store = createStore({
     async getOrdersSum({ commit }) {
       let result = await axios.get(
         'http://localhost/MAROC_ARTISANAT/back-app/getOrdersSum',
-
       );
-      // commit("setorders", result.data);
       return result.data[0].somme;
     },
 
@@ -86,7 +76,6 @@ const store = createStore({
 
       );
       commit("setProductByCategory", result.data);
-      // console.log(result.data);
       return result.data;
     },
 
@@ -96,7 +85,6 @@ const store = createStore({
 
       );
       commit("setProductBySeller", result.data);
-      // console.log(result.data);
       return result.data;
     },
 
