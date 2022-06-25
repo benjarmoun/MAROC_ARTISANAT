@@ -23,7 +23,7 @@
                                 <p class="text-base font-black leading-none text-gray-800 dark:text-white">{{product.name}}</p>
                             </div>
                             <p class="text-xs leading-3 text-gray-600 dark:text-white pt-2">{{product.description}} </p>
-                            <p class="w-96 text-xs mt-3 leading-3 text-gray-600 dark:text-white">Category: {{product.category}}</p>
+                            <!-- <p class="w-96 text-xs mt-3 leading-3 text-gray-600 dark:text-white">Category: {{product.category}}</p> -->
                             <div class="flex items-center justify-between pt-5">
                                 <div class="flex itemms-center">
                                     <a href="#" @click="removeFromCart(product)" class="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</a>
@@ -68,9 +68,9 @@
                               <!-- <button @click="email" >
                                 botona <br>
                               </button> -->
-                              <!-- <button class="m-3" @click="clearCart" >
-                                botona clearCart
-                              </button> -->
+                              <button class="m-3" @click="clearCart" >
+                               ClearCart
+                              </button>
                         </div>
                     </div>
                 </div>

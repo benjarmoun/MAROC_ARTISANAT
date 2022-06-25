@@ -106,6 +106,11 @@ import router from '../router';
 
 			},
 		},
+		mounted() {
+			 if(JSON.parse(localStorage.getItem('user'))){
+          this.$router.push({name:"home"});
+        }
+		},
 		
 		
     };
