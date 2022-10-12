@@ -264,7 +264,7 @@ class ProductsController{
         // Instantiate product object
         $product = new Products($db);
 
-        // Get id
+        // Get id 
         $product->seller_id = $id;
 
         // Get product by seller
